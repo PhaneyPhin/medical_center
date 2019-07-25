@@ -116,5 +116,10 @@ export default {
       { id: 2, value:"traffic_accident" },
       { id: 3, value:"other_accident" },
       { id: 4, value:"disaster" },
+    ],
+    reasons:[
+      {id:1,value:"test1"},
+      {id:2,value:"test2"},
+
     ]
 }

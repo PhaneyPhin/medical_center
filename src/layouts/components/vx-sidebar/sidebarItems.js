@@ -121,7 +121,7 @@ export default [
     url: null,
     name: "setting",
     slug: "setting",
-    icon: "FileTextIcon",
+    icon: "SettingsIcon",
     i18n: "setting",
     submenu: [
       {
