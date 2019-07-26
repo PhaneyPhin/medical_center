@@ -256,6 +256,10 @@ export default {
           {id:2,th:"นางสาว",en:"Miss"}
         ],
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
     }
   },
 

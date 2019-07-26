@@ -55,6 +55,10 @@ export default {
   data() {
     return {
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
     }
   },
 

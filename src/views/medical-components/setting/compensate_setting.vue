@@ -10,7 +10,7 @@
             <div class="vx-col md:w-1/4 w-full mt-5">
 
               <label class="vx-row" style="padding-left:20px;padding-bottom:5px;">
-                {{$t('red')}}
+                {{$t('reds')}}
                 <div class="ml-1 h-4 w-4 rounded-full mr-4 bg-danger" style="margin-top:5px;"></div>
               </label>
               <vs-input type="text" v-model="tr.red" class="w-full"/>
@@ -18,7 +18,7 @@
             </div>
             <div class="vx-col md:w-1/4 w-full mt-5">
               <label class="vx-row" style="padding-left:20px;padding-bottom:5px;">
-                {{$t('yellow')}}
+                {{$t('yellows')}}
                 <div class="ml-1 h-4 w-4 rounded-full mr-4 bg-warning" style="margin-top:5px;"></div>
               </label>
               <vs-input type="text" v-model="tr.yellow" class="w-full"/>
@@ -26,7 +26,7 @@
             </div>
             <div class="vx-col md:w-1/4 w-full mt-5">
               <label class="vx-row" style="padding-left:20px;padding-bottom:5px;">
-                {{$t('green')}}
+                {{$t('greens')}}
                 <div class="ml-1 h-4 w-4 rounded-full mr-4 bg-success" style="margin-top:5px;"></div>
               </label>
               <vs-input type="text" v-model="tr.green" class="w-full"/>

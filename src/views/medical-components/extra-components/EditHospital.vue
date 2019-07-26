@@ -173,6 +173,10 @@ export default {
         under_status:service.under_status,
         hospital_types:service.hospital_types,
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
     }
   },
 

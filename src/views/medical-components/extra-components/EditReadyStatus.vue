@@ -1,11 +1,4 @@
-<!-- =========================================================================================
-  File Name: AddNewDataSidebar.vue
-  Description: Add New Data - Sidebar component
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuesax Admin - VueJS Dashboard Admin Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-========================================================================================== -->
+
 
 
 <template>
@@ -30,7 +23,7 @@
       <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" @click="save" vslor="primary">
        {{$t('save')}}
        </vs-button>
-      <!-- <vs-button class="mr-6" @click="save">{{$t('save')}}</vs-button> -->
+
       <vs-button type="border" color="danger" @click="isSidebarActiveLocal = false">Cancel</vs-button>
     </div>
   </vs-sidebar>
@@ -55,6 +48,10 @@ export default {
   data() {
     return {
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
     }
   },
 

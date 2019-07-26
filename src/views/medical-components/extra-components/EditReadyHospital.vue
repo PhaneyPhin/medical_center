@@ -47,12 +47,12 @@
 
                          </div>
                          <div class="vx-col  md:w-1/2 w-full mt-5">
-                          <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_hospital.start_date}" v-model="newReadyHospital.start_date"></datepicker>
-                          <div class="error" v-if="invalid_hospital.start_date">{{$t("start_date_alert")}}</div>
+                          <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_hospital.new_start_date}" v-model="newReadyHospital.new_start_date"></datepicker>
+                          <div class="error" v-if="invalid_hospital.new_start_date">{{$t("start_date_alert")}}</div>
                          </div>
 
                          <div class="vx-col  md:w-1/3 w-full mt-5">
-                            <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.start_time" placeholder="Choose time" />
+                            <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.new_start_time" placeholder="Choose time" />
                          </div>
                        </div>
                   </div>
@@ -63,13 +63,13 @@
 
                          </div>
                          <div class="vx-col  md:w-1/2 w-full mt-5">
-                            <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full"  :class="{'danger':invalid_hospital.end_date||invalid_hospital.end_date_less}" v-model="newReadyHospital.end_date"></datepicker>
-                            <div class="error" v-if="invalid_hospital.end_date">{{$t('end_date_alert')}}</div>
-                            <div class="error" v-if="!invalid_hospital.end_date&&invalid_hospital.end_date_less">{{$t("end_date_less")}}</div>
+                            <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full"  :class="{'danger':invalid_hospital.new_end_date||invalid_hospital.new_end_date_less}" v-model="newReadyHospital.new_end_date"></datepicker>
+                            <div class="error" v-if="invalid_hospital.new_end_date">{{$t('end_date_alert')}}</div>
+                            <div class="error" v-if="!invalid_hospital.new_end_date&&invalid_hospital.new_end_date_less">{{$t("end_date_less")}}</div>
                          </div>
 
                          <div class="vx-col  md:w-1/3 w-full mt-5">
-                          <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.end_time" placeholder="Choose time" />
+                          <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.new_end_time" placeholder="Choose time" />
                          </div>
                        </div>
                   </div>
@@ -97,7 +97,7 @@
 
                          </div>
                          <div class="vx-col  md:w-5/6 w-full mt-5">
-                            <vs-textarea class="w-full" v-model="detail"/>
+                            <vs-textarea class="w-full" v-model="newReadyHospital.detail"/>
                          </div>
                        </div>
                   </div>
@@ -148,8 +148,13 @@ export default {
       reason_hospitals:service.reason_hospitals,
       newReadyHospital:{},
       submitted:false,
+      hospitals:[],
       operating_units:[],
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
     }
   },
 
@@ -176,11 +181,11 @@ export default {
        var c=type=>{
          return this.submitted&&this.body_hospital[type]=="";
        };
-       return {hospital:c("hospital_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_hospital.end_date).isAfter(this.body_hospital.start_date)}
+       return {hospital:c("hospital_id"),new_start_date:c("new_start_date"),new_end_date:c("new_end_date"),reason:c("reason"),
+        new_end_date_less:this.submitted&&!moment(this.body_hospital.new_end_date).isAfter(monent(this.body_hospital.new_start_date))}
      },
      isInvalid_hospital(){
-       return this.invalid_hospital.hospital||this.invalid_hospital.start_date||this.invalid_hospital.end_date||this.invalid_hospital.end_date_less||this.invalid_hospital.reason;
+       return this.invalid_hospital.hospital||this.invalid_hospital.new_start_date||this.invalid_hospital.new_end_date||this.invalid_hospital.new_end_date_less||this.invalid_hospital.reason;
      },
       body_hospital(){
 
@@ -195,7 +200,7 @@ export default {
    created(){
       service.getData('get_hospital_master').then((result)=>{
          if(!result.code){
-           this.operating_units=result.data;
+           this.hospitals=result.data;
          }else{
            this.$swal(result.message,'','error');
          }

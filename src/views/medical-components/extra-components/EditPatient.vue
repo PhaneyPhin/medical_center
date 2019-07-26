@@ -386,6 +386,10 @@ export default {
         other_congenital_diseas:"",
         detail:"",
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
     }
   },
 

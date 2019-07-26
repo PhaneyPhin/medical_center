@@ -21,90 +21,57 @@
         <div class="vx-col w-full mb-base" style="padding:20px">
             <!-- <pre>{{operator}}</pre> -->
             <div class="mt-3">
-                <div class="vx-row">
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('operating_unit_name')}}</label>
+                 <div class="vx-row">
 
-                         </div>
-                         <div class="vx-col  md:w-2/3 w-full mt-5">
+                         <div class="vx-col  w-full mt-5">
+                           <label>{{$t('operating_unit_name')}}</label>
                             <vs-select autocomplete class="w-full" v-model="newReadyOperatingUnit.operating_unit_id" :danger="invalid_operating_unit.operating_unit">
                               <vs-select-item :key="index" :value="item.operating_unit_id" :text="item.operating_unit_name" v-for="(item,index) in operating_units" />
                             </vs-select>
                             <div class="error" v-if="invalid_operating_unit.operating_unit">{{$t("operating_unit_alert")}}</div>
                          </div>
-                       </div>
-                  </div>
+                </div>
+                 <div class="vx-row">
 
+
+                         <div class="vx-col  w-full mt-5">
+                            <label>{{$t('start_date')}}</label>
+                            <div class="vx-row w-full">
+                              <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="vx-col md:w-2/3 w-full" :class="{'danger':invalid_operating_unit.new_start_date}" v-model="newReadyOperatingUnit.new_start_date"></datepicker>
+                              <flat-pickr :config="configdateTimePicker"  class="vx-col md:w-1/3 w-full"  v-model="newReadyOperatingUnit.new_start_time" placeholder="Choose time" />
+                            </div>
+                            <div class="error" v-if="invalid_operating_unit.new_start_date">{{$t("start_date_alert")}}</div>
+                         </div>
                 </div>
                 <div class="vx-row">
 
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('start_date')}}</label>
-
+                         <div class="vx-col  w-full mt-5">
+                            <label>{{$t('end_date')}}</label>
+                            <div class="vx-row w-full">
+                              <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="vx-col md:w-2/3 w-full" :class="{'danger':invalid_operating_unit.new_end_date}" v-model="newReadyOperatingUnit.new_end_date"></datepicker>
+                              <flat-pickr :config="configdateTimePicker"  class="vx-col md:w-1/3 w-full"  v-model="newReadyOperatingUnit.new_end_time" placeholder="Choose time" />
+                            </div>
+                            <div class="error" v-if="invalid_operating_unit.new_end_date">{{$t("end_date_alert")}}</div>
+                             <div class="error" v-if="!invalid_operating_unit.new_end_date&&invalid_operating_unit.new_end_date_less">{{$t("end_date_alert")}}</div>
                          </div>
-                         <div class="vx-col  md:w-1/2 w-full mt-5">
-                          <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_operating_unit.start_date}" v-model="newReadyOperatingUnit.start_date"></datepicker>
-                          <div class="error" v-if="invalid_operating_unit.start_date">{{$t("start_date_alert")}}</div>
-                         </div>
-
-                         <div class="vx-col  md:w-1/3 w-full mt-5">
-                            <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyOperatingUnit.start_time" placeholder="Choose time" />
-                         </div>
-                       </div>
-                  </div>
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('end_date')}}</label>
-
-                         </div>
-                         <div class="vx-col  md:w-1/2 w-full mt-5">
-                            <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full"  :class="{'danger':invalid_operating_unit.end_date||invalid_operating_unit.end_date_less}" v-model="newReadyOperatingUnit.end_date"></datepicker>
-                            <div class="error" v-if="invalid_operating_unit.end_date">{{$t('end_date_alert')}}</div>
-                            <div class="error" v-if="!invalid_operating_unit.end_date&&invalid_operating_unit.end_date_less">{{$t("end_date_less")}}</div>
-                         </div>
-
-                         <div class="vx-col  md:w-1/3 w-full mt-5">
-                          <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyOperatingUnit.end_time" placeholder="Choose time" />
-                         </div>
-                       </div>
-                  </div>
                 </div>
-
                 <div class="vx-row">
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('reason')}}</label>
-
-                         </div>
-                         <div class="vx-col  md:w-5/6 w-full mt-5">
+                         <div class="vx-col  w-full mt-5">
+                          <label>{{$t('reason')}}</label>
                            <vs-select class="w-full" v-model="newReadyOperatingUnit.reason"  :danger="invalid_operating_unit.reason">
-                            <vs-select-item :key="index" :value="item.id" :text="item.value" v-for="(item,index) in reason_operating_units" />
+                            <vs-select-item :key="index" :value="item.id" :text="item.value" v-for="(item,index) in reasons" />
                             </vs-select>
                            <div class="error" v-if="invalid_operating_unit.reason">{{$t("reason_alert")}}</div>
                          </div>
-                       </div>
-                  </div>
-                   <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('detail_')}}</label>
-
-                         </div>
-                         <div class="vx-col  md:w-5/6 w-full mt-5">
-                            <vs-textarea class="w-full" v-model="detail"/>
-                         </div>
-                       </div>
-                  </div>
-
-                </div>
 
               </div>
+                 <div class="vx-row">
+                  <div class="vx-col w-full mt-5">
+                      <label>{{$t('detail_')}}</label>
+                      <vs-textarea class="w-full" v-model="newReadyOperatingUnit.detail"/>
+                  </div>
+              </div>
+            </div>
         </div>
     </VuePerfectScrollbar>
 
@@ -149,6 +116,10 @@ export default {
       newReadyOperatingUnit:{},
       submitted:false,
       operating_units:[],
+      settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
         addNewDataSidebar: false,
     }
   },
@@ -176,11 +147,11 @@ export default {
        var c=type=>{
          return this.submitted&&this.body_operating_unit[type]=="";
        };
-       return {operating_unit:c("operating_unit_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_operating_unit.end_date).isAfter(this.body_operating_unit.start_date)}
+       return {operating_unit:c("operating_unit_id"),new_start_date:c("new_start_date"),end_date:c("new_end_date"),reason:c("reason"),
+        new_end_date_less:this.submitted&&!moment(this.body_operating_unit.new_end_date).isAfter(moment(this.body_operating_unit.new_start_date))}
      },
      isInvalid_operating_unit(){
-       return this.invalid_operating_unit.operating_unit||this.invalid_operating_unit.start_date||this.invalid_operating_unit.end_date||this.invalid_operating_unit.end_date_less||this.invalid_operating_unit.reason;
+       return this.invalid_operating_unit.operating_unit||this.invalid_operating_unit.new_start_date||this.invalid_operating_unit.new_end_date||this.invalid_operating_unit.new_end_date_less||this.invalid_operating_unit.reason;
      },
       body_operating_unit(){
 
@@ -188,12 +159,12 @@ export default {
         data.new_start_time=data.new_start_time==""?"00:00:00":data.new_start_time;
         data.new_end_time=data.new_end_time==""?"00:00:00":data.new_end_time;
         data.new_start_date=data.new_start_date!=""?moment(data.new_start_date).format("YYYY-MM-DD")+'T'+data.new_start_time:"";
-        data.new_end_date=data.new_end_date!=""?moment(data.new_end_date).format("YYYY-MM-DD")+'T'+data.new_end_time:"";
+        data.new_start_date=data.new_end_date!=""?moment(data.new_end_date).format("YYYY-MM-DD")+'T'+data.new_end_time:"";
         return data;
      }
    },
    created(){
-      service.getData('get_operating_unit_master').then((result)=>{
+      service.getData('get_operating').then((result)=>{
          if(!result.code){
            this.operating_units=result.data;
          }else{
@@ -207,6 +178,7 @@ export default {
 
       save(){
           this.submitted=true;
+          console.log(this.newReadyOperatingUnit)
           if(!this.isInvalid_operating_unit){
             this.$vs.loading({
                   background: this.backgroundLoading,
@@ -215,7 +187,7 @@ export default {
                   scale: 0.45
             })
 
-            service.postData('update_ready_operating_unit',this.body_operating_unit).then((result)=>{
+            service.postData('update_ready_operatingunit',this.body_operating_unit).then((result)=>{
               if(!result.code){
 
                  this.$vs.loading.close("#button-with-loading > .con-vs-loading")
@@ -244,6 +216,7 @@ export default {
         this.newReadyOperatingUnit.new_start_time=moment(val.start_date).format('HH:mm:ss');
         this.newReadyOperatingUnit.new_end_date=moment(val.end_date).format('YYYY-MM-DD');
         this.newReadyOperatingUnit.new_end_time=moment(val.end_date).format('HH:mm:ss');
+        console.log(this.newReadyOperatingUnit)
      },
     }
 
@@ -258,7 +231,7 @@ export default {
 
   /deep/ .vs-sidebar {
     z-index: 52010;
-    width: 80%;
+    width:400px;
     max-width: 90vw;
 
     .img-upload {

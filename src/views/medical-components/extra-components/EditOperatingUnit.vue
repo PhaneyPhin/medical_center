@@ -211,6 +211,10 @@ export default {
         locations:[],
         tambons:[],
         provinces:[],
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
         operating_unit_name:"","department":"","zone":"","unit_type":"","unit_size":"","unit_status":"","address":"","tambon":"","amphur":"","province":"","postcode":"","tel":"","employee_number":"","ambulance_number":"","manager_name":"","remark":"","lat":"0","lon":"0","perform_count":"","decline_count":"",
     }
   },

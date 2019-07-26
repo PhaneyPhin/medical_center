@@ -175,6 +175,10 @@ export default {
         tambons:[],
         provinces:[],
         addNewDataSidebar: false,
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
 
     }
   },

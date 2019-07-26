@@ -1,7 +1,7 @@
 <template >
   <div class="vx-col w-full mb-base" v-if="renderComponent">
 
-    <edit-ready-operating-unit :isSidebarActive="addNewDataSidebar" :ReadyOperatingUnit="ready_operatingunit" @closeSidebar="addNewDataSidebar = false" />
+    <edit-ready-operating-unit :isSidebarActive="addNewDataSidebar" :Readyoperating_unit="ready_operatingunit" @closeSidebar="addNewDataSidebar = false" />
      <edit-ready-hospital :isSidebarActive="addNewDataSidebar_hospital" :ReadyHospital="ready_hospital" @closeSidebar="addNewDataSidebar_hospital = false" />
     <vx-card>
         <vs-tabs>
@@ -231,7 +231,7 @@
 
                          </div>
                          <div class="vx-col  md:w-5/6 w-full mt-5">
-                            <vs-textarea class="w-full" v-model="detail"/>
+                            <vs-textarea class="w-full" v-model="newReadyHospital.detail"/>
                          </div>
                        </div>
                   </div>
@@ -399,14 +399,14 @@ export default {
          return this.submitted&&this.body_hospital[type]=="";
        };
        return {hospital:c("hospital_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_hospital.end_date).isAfter(this.body_hospital.start_date)}
+        end_date_less:this.submitted&&!moment(this.body_hospital.end_date).isAfter(monent(this.body_hospital.start_date))}
      },
      invalid_operatingunit(){
        var c=type=>{
          return this.submitted&&this.body_operation[type]=="";
        };
        return {operatingunit:c("operating_unit_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_operation.end_date).isAfter(this.body_operation.start_date)}
+        end_date_less:this.submitted&&!moment(this.body_operation.end_date).isAfter(monent(this.body_operation.start_date))}
      },
      isInvalid_hospital(){
        return this.invalid_hospital.hospital||this.invalid_hospital.start_date||this.invalid_hospital.end_date||this.invalid_hospital.end_date_less||this.invalid_hospital.reason;
@@ -626,6 +626,11 @@ export default {
           if(val==false){
             // alert('done')
             this.getReadyOperatingUnit();
+          }
+        },
+        addNewDataSidebar_hospital(val){
+          if(!val){
+            this.getReadyHospital();
           }
         },
         lang(val) {

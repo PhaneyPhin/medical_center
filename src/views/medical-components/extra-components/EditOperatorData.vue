@@ -370,15 +370,11 @@ export default {
           register_result:"",
           image:"",
           remark:"",
+        settings: { // perfectscrollbar settings
+          maxScrollbarLength: 60,
+          wheelSpeed: .60,
+      },
 
-         'tableList': [
-        'vs-th: Component',
-        'vs-tr: Component',
-        'vs-td: Component',
-        'thread: Slot',
-        'tbody: Slot',
-        'header: Slot'
-      ],
       users: [
 
       ],
