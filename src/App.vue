@@ -13,7 +13,12 @@
 		<router-view></router-view>
 	</div>
 </template>
-
+<style>
+    .error{
+    color:red;
+     font-size:80%;
+  }
+</style>
 <script>
 import themeConfig from '@/../themeConfig.js'
 

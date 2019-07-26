@@ -586,8 +586,14 @@ export default {
     success_title:"ข้อมูลถูกบันทึกเรียบร้อยแล้ว",
     screening_advice:"ข้อควรปฏิบัติในการคัดกรอง",
     command_advice:"ข้อควรปฏิบัติในการสั่งการ",
-    reported_advice:"ข้อควรปฏิบัติในการแจ้งเหตุ"
+    reported_advice:"ข้อควรปฏิบัติในการแจ้งเหตุ",
 
+    operating_unit:"หน่วยปฏิบัติงาน",
+    emergency_room:"ห้องฉุกเฉินโรงพยาบาล",
+    start_date:"วันเวลาเริ่มต้น",
+    end_date:'วันเวลาสิ้นสุด',
+    reason:"สารเหตุไม่แจ้งพร้อม",
+    detail_:"รายละเอียด"
 
   }
 

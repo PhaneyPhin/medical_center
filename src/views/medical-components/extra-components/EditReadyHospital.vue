@@ -25,14 +25,14 @@
                   <div class="vx-col md:w-1/2 w-full mt-5">
                        <div class="vx-row">
                          <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('operating_unit_name')}}</label>
+                           <label>{{$t('hospital_name')}}</label>
 
                          </div>
                          <div class="vx-col  md:w-2/3 w-full mt-5">
-                            <vs-select autocomplete class="w-full" v-model="newReadyOperatingUnit.operating_unit_id" :danger="invalid_operating_unit.operating_unit">
-                              <vs-select-item :key="index" :value="item.operating_unit_id" :text="item.operating_unit_name" v-for="(item,index) in operating_units" />
+                            <vs-select autocomplete class="w-full" v-model="newReadyHospital.hospital_id" :danger="invalid_hospital.hospital">
+                              <vs-select-item :key="index" :value="item.hospital_id" :text="item.hospital_name" v-for="(item,index) in hospitals" />
                             </vs-select>
-                            <div class="error" v-if="invalid_operating_unit.operating_unit">{{$t("operating_unit_alert")}}</div>
+                            <div class="error" v-if="invalid_hospital.hospital">{{$t("hospital_alert")}}</div>
                          </div>
                        </div>
                   </div>
@@ -47,12 +47,12 @@
 
                          </div>
                          <div class="vx-col  md:w-1/2 w-full mt-5">
-                          <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_operating_unit.start_date}" v-model="newReadyOperatingUnit.start_date"></datepicker>
-                          <div class="error" v-if="invalid_operating_unit.start_date">{{$t("start_date_alert")}}</div>
+                          <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_hospital.start_date}" v-model="newReadyHospital.start_date"></datepicker>
+                          <div class="error" v-if="invalid_hospital.start_date">{{$t("start_date_alert")}}</div>
                          </div>
 
                          <div class="vx-col  md:w-1/3 w-full mt-5">
-                            <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyOperatingUnit.start_time" placeholder="Choose time" />
+                            <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.start_time" placeholder="Choose time" />
                          </div>
                        </div>
                   </div>
@@ -63,13 +63,13 @@
 
                          </div>
                          <div class="vx-col  md:w-1/2 w-full mt-5">
-                            <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full"  :class="{'danger':invalid_operating_unit.end_date||invalid_operating_unit.end_date_less}" v-model="newReadyOperatingUnit.end_date"></datepicker>
-                            <div class="error" v-if="invalid_operating_unit.end_date">{{$t('end_date_alert')}}</div>
-                            <div class="error" v-if="!invalid_operating_unit.end_date&&invalid_operating_unit.end_date_less">{{$t("end_date_less")}}</div>
+                            <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full"  :class="{'danger':invalid_hospital.end_date||invalid_hospital.end_date_less}" v-model="newReadyHospital.end_date"></datepicker>
+                            <div class="error" v-if="invalid_hospital.end_date">{{$t('end_date_alert')}}</div>
+                            <div class="error" v-if="!invalid_hospital.end_date&&invalid_hospital.end_date_less">{{$t("end_date_less")}}</div>
                          </div>
 
                          <div class="vx-col  md:w-1/3 w-full mt-5">
-                          <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyOperatingUnit.end_time" placeholder="Choose time" />
+                          <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.end_time" placeholder="Choose time" />
                          </div>
                        </div>
                   </div>
@@ -83,10 +83,10 @@
 
                          </div>
                          <div class="vx-col  md:w-5/6 w-full mt-5">
-                           <vs-select class="w-full" v-model="newReadyOperatingUnit.reason"  :danger="invalid_operating_unit.reason">
-                            <vs-select-item :key="index" :value="item.id" :text="item.value" v-for="(item,index) in reason_operating_units" />
+                           <vs-select class="w-full" v-model="newReadyHospital.reason"  :danger="invalid_hospital.reason">
+                            <vs-select-item :key="index" :value="item.id" :text="item.value" v-for="(item,index) in reason_hospitals" />
                             </vs-select>
-                           <div class="error" v-if="invalid_operating_unit.reason">{{$t("reason_alert")}}</div>
+                           <div class="error" v-if="invalid_hospital.reason">{{$t("reason_alert")}}</div>
                          </div>
                        </div>
                   </div>
@@ -133,7 +133,7 @@ export default {
       type: Boolean,
       required: true
     },
-    Readyoperating_unit:{
+    ReadyHospital:{
       type:Object,
       required:true
     }
@@ -145,8 +145,8 @@ export default {
               enableSeconds: true,
               noCalendar: true
             },
-      reasons:service.reasons,
-      newReadyOperatingUnit:{},
+      reason_hospitals:service.reason_hospitals,
+      newReadyHospital:{},
       submitted:false,
       operating_units:[],
         addNewDataSidebar: false,
@@ -172,19 +172,19 @@ export default {
         }
       }
     },
-    invalid_operating_unit(){
+    invalid_hospital(){
        var c=type=>{
-         return this.submitted&&this.body_operating_unit[type]=="";
+         return this.submitted&&this.body_hospital[type]=="";
        };
-       return {operating_unit:c("operating_unit_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_operating_unit.end_date).isAfter(this.body_operating_unit.start_date)}
+       return {hospital:c("hospital_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
+        end_date_less:this.submitted&&!moment(this.body_hospital.end_date).isAfter(this.body_hospital.start_date)}
      },
-     isInvalid_operating_unit(){
-       return this.invalid_operating_unit.operating_unit||this.invalid_operating_unit.start_date||this.invalid_operating_unit.end_date||this.invalid_operating_unit.end_date_less||this.invalid_operating_unit.reason;
+     isInvalid_hospital(){
+       return this.invalid_hospital.hospital||this.invalid_hospital.start_date||this.invalid_hospital.end_date||this.invalid_hospital.end_date_less||this.invalid_hospital.reason;
      },
-      body_operating_unit(){
+      body_hospital(){
 
-        var data=this.newReadyOperatingUnit;
+        var data=this.newReadyHospital;
         data.new_start_time=data.new_start_time==""?"00:00:00":data.new_start_time;
         data.new_end_time=data.new_end_time==""?"00:00:00":data.new_end_time;
         data.new_start_date=data.new_start_date!=""?moment(data.new_start_date).format("YYYY-MM-DD")+'T'+data.new_start_time:"";
@@ -193,7 +193,7 @@ export default {
      }
    },
    created(){
-      service.getData('get_operating_unit_master').then((result)=>{
+      service.getData('get_hospital_master').then((result)=>{
          if(!result.code){
            this.operating_units=result.data;
          }else{
@@ -207,7 +207,7 @@ export default {
 
       save(){
           this.submitted=true;
-          if(!this.isInvalid_operating_unit){
+          if(!this.isInvalid_hospital){
             this.$vs.loading({
                   background: this.backgroundLoading,
                   color: this.colorLoading,
@@ -215,13 +215,13 @@ export default {
                   scale: 0.45
             })
 
-            service.postData('update_ready_operating_unit',this.body_operating_unit).then((result)=>{
+            service.postData('update_ready_hospital',this.body_hospital).then((result)=>{
               if(!result.code){
 
                  this.$vs.loading.close("#button-with-loading > .con-vs-loading")
                 this.$swal(this.$t('success_title'),'','success');
                  this.isSidebarActiveLocal=false;
-                // this.getReadyoperating_unit();
+                // this.getReadyHospital();
               }else{
                  this.$vs.loading.close("#button-with-loading > .con-vs-loading")
                  this.isSidebarActive=false;
@@ -237,13 +237,13 @@ export default {
       },
     },
   watch: {
-    Readyoperating_unit(val){
+    ReadyHospital(val){
       // alert(JSON.stringify(val))
-        this.newReadyOperatingUnit=val;
-        this.newReadyOperatingUnit.new_start_date=moment(val.start_date).format('YYYY-MM-DD');
-        this.newReadyOperatingUnit.new_start_time=moment(val.start_date).format('HH:mm:ss');
-        this.newReadyOperatingUnit.new_end_date=moment(val.end_date).format('YYYY-MM-DD');
-        this.newReadyOperatingUnit.new_end_time=moment(val.end_date).format('HH:mm:ss');
+        this.newReadyHospital=val;
+        this.newReadyHospital.new_start_date=moment(val.start_date).format('YYYY-MM-DD');
+        this.newReadyHospital.new_start_time=moment(val.start_date).format('HH:mm:ss');
+        this.newReadyHospital.new_end_date=moment(val.end_date).format('YYYY-MM-DD');
+        this.newReadyHospital.new_end_time=moment(val.end_date).format('HH:mm:ss');
      },
     }
 

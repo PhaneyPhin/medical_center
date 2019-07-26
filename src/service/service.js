@@ -118,8 +118,16 @@ export default {
       { id: 4, value:"disaster" },
     ],
     reasons:[
-      {id:1,value:"test1"},
-      {id:2,value:"test2"},
+      {id:1,value:"เจ้าหน้าที่ติดภารกิจ"},
+      {id:2,value:"รถพยาบาลติดภารกิจ"},
+      {id:3,value:"สาเหตุอื่นๆ"}
 
-    ]
+    ],
+    reason_hospitals:[
+      {id:1,value:"มีผู้ป่วยจำนวนมากในห้องฉุกเฉิน"},
+      {id:2,value:"เตียงเต็ม"},
+      {id:3,value:"ไม่มีเพทย์เฉพาะทาง"},
+      {id:4,value:"สารเหตุอื่น"}
+
+    ],
 }
