@@ -92,6 +92,7 @@ export default {
       service.postData("update_operation_master",this.body).then((result)=>{
         if(!result.code){
           this.$swal(this.$t('success_title'),'','success');
+          // this.$emit('close');
         }else{
           this.$swal(result.message,'','error');
         }

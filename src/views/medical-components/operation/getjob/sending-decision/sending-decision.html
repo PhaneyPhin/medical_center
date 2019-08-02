@@ -1,5 +1,5 @@
 <div class="vx-col w-full mb-base">
-    <vx-card :title="$t('sending_decision')">
+
         <div class="vx-row mb-6">
             <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
                 <label>{{$t('hospital_name')}}</label>
@@ -39,5 +39,11 @@
                 <vs-checkbox v-model="reason4">{{$t('have_treatment_history')}}</vs-checkbox>
             </div>
         </div>
-    </vx-card>
+        <div class="vx-row mt-10 mr-10">
+          <div class="vx-col w-full" style="text-align: right">
+              <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+              <vs-button  color="warning" @click="$emit('close')">{{$t('cancel')}}</vs-button>
+          </div>
+        </div>
+
 </div>

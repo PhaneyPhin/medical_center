@@ -207,6 +207,7 @@
                               class="w-full"
                               :danger="invalid_screening_symptom_filter"
                               v-model="edit_symptom"
+                              :disabled="edit_symptom_list.length==0"
                             >
                               <vs-select-item
                                 v-for="(item, id) in edit_symptom_list"
@@ -310,9 +311,7 @@ export default {
         });
       } else {
         let temp = result.data.map(x => {
-          x.reported_time = moment(x.reported_time).format(
-            "YYYY-MM-DD HH:mm:ss"
-          );
+        x.reported_time = x.reported_date + " " + x.reported_time;
           switch (x.screening_lv) {
             case 1:
               x.level_text = this.$t("red");
@@ -509,6 +508,8 @@ export default {
               };
             });
             if (temp.length == 0) {
+              this.edit_symptom = null;
+                this.edit_other_symptom = null;
             }
             this.edit_symptom_list = temp;
           }

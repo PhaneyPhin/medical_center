@@ -1375,7 +1375,7 @@ const router = new Router({
                     name: 'pageLogin',
                     component: () => import('@/views/pages/Login.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'public'
                     }
                 },
                 {
@@ -1482,7 +1482,7 @@ router.beforeEach((to, from, next) => {
             to.path === "/pages/register" ||
             to.path === "/callback" ||
             to.path === "/pages/comingsoon" ||
-            (service.isLoggedIn())
+            (service.isLoggedIn()&&service.isTokenExpire())
         ) {
             return next();
         }else{

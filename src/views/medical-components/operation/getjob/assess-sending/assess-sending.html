@@ -1,11 +1,11 @@
 <div class="vx-col w-full mb-base">
-    <vx-card :title="$t('assess_sending')">
+
         <div class="vx-row mb-6">
             <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
                 <label>HN <span class="danger">*</span></label>
             </vs-col>
             <div class="vx-col sm:w-1/2  w-full">
-                <vs-input class="w-full" v-model="sending_hn" />
+                <vs-input class="w-full" v-model="data.sending_hn" />
             </div>
         </div>
         <div class="vx-row mb-6">
@@ -13,7 +13,7 @@
                 <label>{{$t('diagnostic')}}</label>
             </vs-col>
             <div class="vx-col sm:w-1/2  w-full">
-                <vs-input class="w-full" v-model="sending_diagnose" />
+                <vs-input class="w-full" v-model="data.sending_diagnose" />
             </div>
         </div>
         <div class="vx-row mb-6">
@@ -23,21 +23,21 @@
             <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
                 <div class="vx-row mb-6 w-full">
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_lv" vs-value="1">{{$t('red')}}</vs-radio>
+                        <vs-radio v-model="data.sending_lv" vs-value="1">{{$t('red')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_lv" vs-value="2">{{$t('yellow')}}
+                        <vs-radio v-model="data.sending_lv" vs-value="2">{{$t('yellow')}}
                         </vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_lv" vs-value="3">{{$t('green')}}</vs-radio>
+                        <vs-radio v-model="data.sending_lv" vs-value="3">{{$t('green')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_lv" vs-value="4">{{$t('white')}}
+                        <vs-radio v-model="data.sending_lv" vs-value="4">{{$t('white')}}
                         </vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_lv" vs-value="5">{{$t('black')}}</vs-radio>
+                        <vs-radio v-model="data.sending_lv" vs-value="5">{{$t('black')}}</vs-radio>
                     </div>
                 </div>
             </vs-col>
@@ -49,17 +49,17 @@
             <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
                 <div class="vx-row mb-6 w-full">
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_breating" vs-value="b1">{{$t('not_neccesary')}}</vs-radio>
+                        <vs-radio v-model="data.sending_breating" vs-value="b1">{{$t('not_neccesary')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_breating" vs-value="b2">{{$t('not_do')}}
+                        <vs-radio v-model="data.sending_breating" vs-value="b2">{{$t('not_do')}}
                         </vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_breating" vs-value="b3">{{$t('do')}}</vs-radio>
+                        <vs-radio v-model="data.sending_breating" vs-value="b3">{{$t('do')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_breating" vs-value="b4">{{$t('do_but_mproper')}}
+                        <vs-radio v-model="data.sending_breating" vs-value="b4">{{$t('do_but_mproper')}}
                         </vs-radio>
                     </div>
                 </div>
@@ -72,17 +72,17 @@
             <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
                 <div class="vx-row mb-6 w-full">
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_bleeding" vs-value="c1">{{$t('not_neccesary')}}</vs-radio>
+                        <vs-radio v-model="data.sending_bleeding" vs-value="c1">{{$t('not_neccesary')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_bleeding" vs-value="c2">{{$t('not_do')}}
+                        <vs-radio v-model="data.sending_bleeding" vs-value="c2">{{$t('not_do')}}
                         </vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_bleeding" vs-value="c3">{{$t('do')}}</vs-radio>
+                        <vs-radio v-model="data.sending_bleeding" vs-value="c3">{{$t('do')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_bleeding" vs-value="c4">{{$t('do_but_mproper')}}
+                        <vs-radio v-model="data.sending_bleeding" vs-value="c4">{{$t('do_but_mproper')}}
                         </vs-radio>
                     </div>
                 </div>
@@ -95,17 +95,17 @@
             <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
                 <div class="vx-row mb-6 w-full">
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_watering" vs-value="d1">{{$t('not_neccesary')}}</vs-radio>
+                        <vs-radio v-model="data.sending_watering" vs-value="d1">{{$t('not_neccesary')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_watering" vs-value="d2">{{$t('not_do')}}
+                        <vs-radio v-model="data.sending_watering" vs-value="d2">{{$t('not_do')}}
                         </vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_watering" vs-value="d3">{{$t('do')}}</vs-radio>
+                        <vs-radio v-model="data.sending_watering" vs-value="d3">{{$t('do')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="sending_watering" vs-value="d4">{{$t('do_but_mproper')}}
+                        <vs-radio v-model="data.sending_watering" vs-value="d4">{{$t('do_but_mproper')}}
                         </vs-radio>
                     </div>
                 </div>
@@ -116,26 +116,30 @@
                 <label>{{$t('bone')}}</label>
             </vs-col>
             <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
-                <vs-input class="w-full" v-model="sending_name" />
+                <div class="vx-row mb-6 w-full">
+                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+                        <vs-radio v-model="data.sending_bone" vs-value="e1">{{$t('not_neccesary')}}</vs-radio>
+                    </div>
+                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+                        <vs-radio v-model="data.sending_bone" vs-value="e2">{{$t('not_do')}}
+                        </vs-radio>
+                    </div>
+                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+                        <vs-radio v-model="data.sending_bon" vs-value="e3">{{$t('do')}}</vs-radio>
+                    </div>
+                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+                        <vs-radio v-model="data.sending_bon" vs-value="e4">{{$t('do_but_mproper')}}
+                        </vs-radio>
+                    </div>
+                </div>
             </vs-col>
         </div>
         <div class="vx-row mb-6">
             <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
                 <label>{{$t('diagnose_name')}}</label>
             </vs-col>
-            <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
-                <div class="vx-row mb-6 w-full">
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="diagnose_role" vs-value="doctor">{{$t('doctor')}}</vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="diagnose_role" vs-value="nurse">{{$t('nurse')}}
-                        </vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="diagnose_role" vs-value="etc">{{$t('etc')}}</vs-radio>
-                    </div>
-                </div>
+            <vs-col vs-type="flex" vs-lg="8" vs-sm="8" vs-justify="center">
+                <vs-input class="w-full" v-model="data.sending_name" />
             </vs-col>
         </div>
         <div class="vx-row mb-6">
@@ -145,17 +149,22 @@
             <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
                 <div class="vx-row mb-6 w-full">
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="diagnose_role" vs-value="doctor">{{$t('doctor')}}</vs-radio>
+                        <vs-radio v-model="data.diagnose_role" vs-value="doctor">{{$t('doctor')}}</vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="diagnose_role" vs-value="nurse">{{$t('nurse')}}
+                        <vs-radio v-model="data.diagnose_role" vs-value="nurse">{{$t('nurse')}}
                         </vs-radio>
                     </div>
                     <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="diagnose_role" vs-value="etc">{{$t('etc')}}</vs-radio>
+                        <vs-radio v-model="data.diagnose_role" vs-value="etc">{{$t('etc')}}</vs-radio>
                     </div>
                 </div>
             </vs-col>
         </div>
-    </vx-card>
+        <div class="vx-row mt-10 mr-10">
+          <div class="vx-col w-full" style="text-align: right">
+              <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+              <vs-button  color="warning" @click="$emit('close')">{{$t('cancel')}}</vs-button>
+          </div>
+        </div>
 </div>

@@ -1,5 +1,297 @@
-<div class="vx-row">
-    <div class="vx-col">
-        patient data
+<div>
+  <div class="vx-col w-full mb-base">
+    <vs-divider position="left" class="mb-10">
+      <h3>{{$t("patient_status")}}</h3>
+    </vs-divider>
+    <div class="vx-row">
+      <div class="vx-col w-full">
+        <!-- <table class="table table-bordered">
+            <tr class="head">
+              <td rowspan="2">Time</td>
+              <td colspan="4">Vital Signs</td>
+              <td colspan="4">Vital Signs</td>
+              <td colspan="4">Vital Signs</td>
+              <td rowspan="2">Vital Signs</td>
+              <td rowspan="2">Vital Signs</td>
+            </tr>
+            <tr class="head">
+                <td>T</td>
+                <td>BP</td>
+                <td>PR</td>
+                <td>RR</td>
+                <td>T</td>
+                <td>BP</td>
+                <td>PR</td>
+                <td>RR</td>
+                <td>T</td>
+                <td>BP</td>
+                <td>PR</td>
+                <td>RR</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table> -->
+      </div>
     </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('broken_bone')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in broken_bones" :key="index">
+            <vs-checkbox v-model="data.broken_bone" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <vs-divider position="left" class="mb-10">
+      <h3>Trauma</h3>
+    </vs-divider>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('trauma_wound')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_wounds" :key="index">
+            <vs-checkbox v-model="data.trauma_wound" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('trauma_bone')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_bones" :key="index">
+            <vs-checkbox v-model="data.trauma_bone" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('trauma_blood')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_bloods" :key="index">
+            <vs-checkbox v-model="data.trauma_blood" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('trauma_body')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_bodys" :key="index">
+            <vs-checkbox v-model="data.trauma_body" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <vs-divider position="left" class="mb-10">None Trauma</vs-divider>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('ntrauma_medicine')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_medicines" :key="index">
+            <vs-checkbox v-model="data.ntrauma_medicine" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('ntrauma_obstetrician')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_obstetricians" :key="index">
+            <vs-checkbox v-model="data.ntrauma_obstetrician" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('ntrauma_child')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_childs" :key="index">
+            <vs-checkbox v-model="data.ntrauma_child" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('ntrauma_surgery')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_surgerys" :key="index">
+            <vs-checkbox v-model="data.ntrauma_surgery" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('ntruama_other')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntruama_others" :key="index">
+            <vs-checkbox v-model="data.ntruama_other" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <vs-divider position="left" class="mb-10">Treatment</vs-divider>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('treatment_breath')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_breaths" :key="index">
+            <vs-checkbox v-model="data.treatment_breath" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('treatment_wound')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_wounds" :key="index">
+            <vs-checkbox v-model="data.treatment_wound" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('treatment_water')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_waters" :key="index">
+            <vs-checkbox v-model="data.treatment_water" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('treatment_bone')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_bones" :key="index">
+            <vs-checkbox v-model="data.treatment_bone" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('treatment_cpr')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_cprs" :key="index">
+            <vs-checkbox v-model="data.treatment_cpr" :vs-value="item">{{item}}</vs-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <vs-divider class="mb-10"></vs-divider>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center;padding-top:10px;">
+        {{$t('medicine_suggestion')}}
+      </div>
+      <div class="vx-col md:w-1/2">
+        <vs-input class="w-full" v-model="data.medicine_suggestion"></vs-input>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('primary_result')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in primary_results" :key="index">
+            <vs-radio v-model="data.primary_result" :vs-value="item">{{item}}</vs-radio>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('rc_code')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in rc_codes" :key="index">
+            <vs-radio v-model="data.rc_code" :vs-value="index">{{item}}</vs-radio>
+          </div>
+        </div>
+      </div>
+    </div>
+    <vs-divider class="mb-10"></vs-divider>
+    <div class="vx-row mb-5">
+      <div class="vx-col mt-5 md:w-1/2">
+        <label>{{$t('patient_img1')}}</label>
+        <vs-input type="file" class="w-full" @change="onFileChange($event,'patient_img1')"></vs-input>
+      </div>
+      <div class="vx-col mt-5 md:w-1/2">
+        <label>{{$t('patient_img2')}}</label>
+        <vs-input type="file" class="w-full" @change="onFileChange($event,'patient_img2')"></vs-input>
+      </div>
+      <div class="vx-col mt-5 md:w-1/2">
+        <label>{{$t('patient_img3')}}</label>
+        <vs-input type="file" class="w-full" @change="onFileChange($event,'patient_img3')"></vs-input>
+      </div>
+      <div class="vx-col mt-5 md:w-1/2">
+        <label>{{$t('patient_img4')}}</label>
+        <vs-input type="file" class="w-full" @change="onFileChange($event,'patient_img4')"></vs-input>
+      </div>
+    </div>
+  </div>
+  <div class="vx-row mt-10 mr-10">
+    <div class="vx-col w-full" style="text-align: right">
+      <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary"
+        @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+      <vs-button color="warning" @click="$emit('close')">{{$t('cancel')}}</vs-button>
+    </div>
+  </div>
 </div>

@@ -5,11 +5,11 @@
       <label>{{$t("reported_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-2/3">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" placeholder="choose date" disabled/>
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/3">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" class="w-full" placeholder="Choose time" disabled />
         </div>
       </div>
       <!-- <vs-select autocomplete class="w-full" v-model="data.operating_unit_id">
@@ -20,11 +20,11 @@
       <label>{{$t("commad_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-2/3">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" placeholder="choose date" disabled />
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/3">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" class="w-full" placeholder="Choose time"  disabled/>
         </div>
       </div>
     </div>
@@ -35,15 +35,15 @@
       <label>{{$t("leave_base_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-1/2">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" v-model="data.leave_base_time" placeholder="choose date" />
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/4">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" v-model="leave_base_time" class="w-full" placeholder="Choose time" />
         </div>
         <div class="vx-col md:w-1/4">
 
-          <vs-button class="w-full">{{$t("now")}}</vs-button>
+          <vs-button class="w-full" color="success" @click="now('leave_base_time')">{{$t("now")}}</vs-button>
         </div>
       </div>
     </div>
@@ -52,15 +52,15 @@
       <label>{{$t("arrive_accident_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-1/2">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" v-model="data.arrive_accident_time" placeholder="choose date" />
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/4">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" v-model="arrive_accident_time" class="w-full" placeholder="Choose time" />
         </div>
         <div class="vx-col md:w-1/4">
 
-          <vs-button class="w-full">{{$t("now")}}</vs-button>
+          <vs-button class="w-full" color="success" @click="now('arrive_accident_time')">{{$t("now")}}</vs-button>
         </div>
       </div>
     </div>
@@ -71,15 +71,15 @@
       <label>{{$t("leave_accident_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-1/2">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" v-model="data.leave_accident_time" placeholder="choose date" />
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/4">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" v-model="leave_accident_time" class="w-full" placeholder="Choose time" />
         </div>
         <div class="vx-col md:w-1/4">
 
-          <vs-button class="w-full">{{$t("now")}}</vs-button>
+          <vs-button class="w-full" color="success" @click="now('leave_accident_time')">{{$t("now")}}</vs-button>
         </div>
       </div>
     </div>
@@ -88,15 +88,15 @@
       <label>{{$t("arrive_hospital_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-1/2">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" v-model="data.arrive_hospital_time" placeholder="choose date" />
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/4">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" v-model="arrive_hospital_time" class="w-full" placeholder="Choose time" />
         </div>
         <div class="vx-col md:w-1/4">
 
-          <vs-button class="w-full">{{$t("now")}}</vs-button>
+          <vs-button class="w-full" color="success" @click="now('arrive_hospital_time')">{{$t("now")}}</vs-button>
         </div>
       </div>
     </div>
@@ -107,18 +107,24 @@
       <label>{{$t("arrive_base_time")}}</label>
       <div class="vx-row">
         <div class="vx-col md:w-1/2">
-          <flat-pickr  class="w-full" placeholder="chose date" />
+          <flat-pickr value=""  class="w-full" v-model="data.arrive_base_time" placeholder="choose date" />
           <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
         </div>
         <div class="vx-col md:w-1/4">
-          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+          <flat-pickr value="" :config="configdateTimePicker" v-model="arrive_base_time" class="w-full" placeholder="Choose time" />
         </div>
         <div class="vx-col md:w-1/4">
 
-          <vs-button class="w-full">{{$t("now")}}</vs-button>
+          <vs-button class="w-full" color="success" @click="now('arrive_base_time')">{{$t("now")}}</vs-button>
         </div>
       </div>
     </div>
 
+  </div>
+  <div class="vx-row mt-10 mr-10">
+    <div class="vx-col w-full" style="text-align: right">
+        <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+        <vs-button  color="warning">{{$t('cancel')}}</vs-button>
+    </div>
   </div>
 </div>

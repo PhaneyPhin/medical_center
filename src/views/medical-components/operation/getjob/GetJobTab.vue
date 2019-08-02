@@ -34,9 +34,10 @@ export default {
   data() {
     return {
       savePage:false,
+      active:true,
       table_data: [],
       tabs:[
-        "general_data","time_data","patient_data","division_status","sending_decision","access_sending","cure_result","cure_conclusion"
+        "general_data","time_data","patient_data","sending_decision","access_sending","cure_result","cure_conclusion"
       ],
       tab:"",
       tabs_show:[]
@@ -69,6 +70,11 @@ export default {
     },
     goto(tab){
       this.tab=tab;
+    }
+  },
+  watch:{
+    active(val){
+      alert(2345678);
     }
   }
 };

@@ -4,3 +4,26 @@
 span{
   text-align: right;
 }
+table{
+  width:100%;
+
+}
+table,td,tr{
+  border:1px solid rgba(0,0,0,0.2);
+}
+td{
+  padding:5px;
+  text-align: center;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+table,td,tr{
+  border-collapse: collapse
+}
+tr.head{
+  font-weight: bold;
+  background:#f7f7f7;
+}
+
+
+

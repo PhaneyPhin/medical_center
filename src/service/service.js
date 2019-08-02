@@ -2,7 +2,7 @@
 import axios from 'axios'
 // import { read } from 'fs';
 // import Axios from 'axios';
-
+import moment from "moment";
 export default {
   // url:`http://203.150.210.26:3007/`
   url: `http://10.255.248.92:3007/`,
@@ -79,6 +79,10 @@ export default {
     setToken(token){
       sessionStorage.setItem(this.tokenText,this.prefix+token);
     },
+    isTokenExpire(){
+      let token = this.getUser()
+      return !(moment(token.exp).isAfter(moment()))
+  },
     getToken(){
       var token= sessionStorage.getItem(this.tokenText);
       if(token)
@@ -239,5 +243,26 @@ export default {
       {value:"7",text:"แจ้งเท็จ",type:"b"},
       {value:"8",text:"มีการเคลื่อนย้ายไปก่อน",type:"b"},
 
-    ]
+    ],
+    trauma_wounds:["No","Cut/Laceration","Abrasion","Contusion","Burn","Stab W","GSW"],
+    trauma_bones:["No","Close Fx","Open Fx","Dislocation"],
+    trauma_bloods:["No","Ext Stopped","Ext Active","Int Haemorrhage"],
+    trauma_bodys:["No","Head/Neck","Face","Spine","Chest/Clavicle","Abdomen","pelvis","Extremity","Ext.BodySurface","Multiple inj."],
+
+    ntrauma_medicines:["Dyspnea","High fever","Alteration of conscious","Seizure","CHest pain","Digestive","Poision","Other"],
+    ntrauma_obstetricians:["Labour pain","Bleeding per vigina","High risk preg.","Rape","other"],
+    ntrauma_childs:["Convulsion","High fever","Dyspnea","Digestive","Other"],
+    ntrauma_surgerys:["Ac. Abd. Pain","UGI Bleeding","Other"],
+    ntruama_others:["Eyes","ENT","Ortho","Psychological problem"],
+
+    treatment_breaths:["No","Clear airway","Oral airway","Suction","02 Cannular/mask","AMBU bag","ET"],
+    treatment_wounds:["No","Pressure Dressing","Dressing","คลึงมดลูก","Other"],
+    treatment_waters:["No","NSS","5%D/N/2","RLS","Other"],
+    treatment_bones:["No","เฝือกลม/ไม้ดาม","Collar with long spinal board","KED"],
+    treatment_cprs:["No","Yes","AED/DF"],
+    primary_results:["ไม้มีการรักษา","ทุเลา","คงเดิม","ทรุดหนัก","เสียชีวิต ณ จุดเกิดเหตุ","เสียชีวิตขระนำส่ง"],
+    rc_codes:["แดง (วิกฤต)","เหลื่อง (เร่งด่วน)","เขียว (ไม่รุ่นแรง)","ขาว (ทั่วไป)","ดำ (รับบริการสาธาณสุขอื่น)"],
+
+    broken_bones:["ไม่มีกระดูกหัก","ข้อเคลื่อน","บาดเจ็บกล้ามดเนื้อ","ศรีษะ","แขนท่อนบน","ขาทอนบน","ข้อหลุด","เชิงกราง","คอหลัง","แขนท่อน","คอ/หลัง","แขนท่อนล่าง"],
+
 }

@@ -70,7 +70,7 @@
                   {{emergency.screening_id }} {{ emergency.level_text }} {{ emergency.screening_no }} {{ emergency.symptom }}
               </div>
             </div>
-            <button @click="select()">click me!</button>
+            <!-- <button @click="select()">click me!</button> -->
         </vx-card>
          <vx-card class="mt-5">
             <h5>{{$t("commanding")}}</h5>
@@ -445,9 +445,9 @@ export default {
    },
    methods: {
      select(){
-        this.gridApi.forEachNode( (node) => {
-          node.setSelected(true);
-        });
+        // this.gridApi.forEachNode( (node) => {
+        //   node.setSelected(true);
+        // });
       //  return this.gridApi.getSelectedNodes();
      },
      getData(){
@@ -477,7 +477,7 @@ export default {
        console.log(grid.api);
        setTimeout(()=>{
            this.gridApi.forEachNode( (node) => {
-          node.setSelected(true);
+          // node.setSelected(true);
         });
        },500);
 
@@ -520,12 +520,13 @@ export default {
       },
       save(){
          var operating_unit_id=this.gridApi.getSelectedNodes().map((item)=>item.data.operating_unit_id);
-         var hospital_id=this.gridApi_hospital.getSelectedNodes().map((item)=>item.data.hospital_id);
-         var data = {emergency_reported_id:this.emergency.emergency_reported_id, operating_unit_id , hospital_id };
+        //  var hospital_id=this.gridApi_hospital.getSelectedNodes().map((item)=>item.data.hospital_id);
+         var data = {emergency_reported_id:this.emergency.emergency_reported_id, operating_unit_id };
          console.log(data);
          service.postData("command_operating_unit",data).then((result)=>{
            if(!result.code){
              this.$swal(this.$t('success_tite'),'','success');
+             this.emergency_page=true;
            }else{
              this.$swal(result.message,'','error');
            }

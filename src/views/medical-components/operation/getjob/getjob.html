@@ -55,5 +55,5 @@
             </template>
         </vs-table>
     </vx-card>
-    <get-job-tab v-if="savePage" :operation_id="selectedOperation_id"></get-job-tab>
+    <get-job-tab v-if="savePage" :operation_id="selectedOperation_id" @close="savePage=false"></get-job-tab>
 </div>

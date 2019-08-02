@@ -189,7 +189,7 @@ export default {
       type: Boolean,
       required: true
     },
-    operating_unit:{
+    ReadyHospital:{
       type:Object,
       required:true
     }

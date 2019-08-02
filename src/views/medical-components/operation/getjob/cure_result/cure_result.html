@@ -1,71 +1,80 @@
 <div class="vx-col w-full mb-base">
-    <vx-card :title="$t('cure_result')">
-        <div class="vx-row mb-6">
-            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
-                <label>Admit <span class="danger">*</span></label>
-            </vs-col>
-            <div class="vx-col sm:w-1/6  w-full">
-                <vs-radio v-model="admit_status" :vs-value="1">{{$t('yes')}}</vs-radio>
-            </div>
-            <div class="vx-col sm:w-1/6  w-full">
-                <vs-radio v-model="admit_status" :vs-value="2">{{$t('no')}}</vs-radio>
-            </div>
+  <!-- <vx-card :title="$t('cure_result')"> -->
+  <div class="mt-5 ml-5 mr-5">
+    <div class="vx-row mb-6">
+      <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+        <label>Admit <span class="danger">*</span></label>
+      </vs-col>
+      <div class="vx-col sm:w-1/6  w-full">
+        <vs-radio v-model="data.admit_status" :vs-value="1">{{$t('yes')}}</vs-radio>
+      </div>
+      <div class="vx-col sm:w-1/6  w-full">
+        <vs-radio v-model="data.admit_status" :vs-value="2">{{$t('no')}}</vs-radio>
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+        <label>{{$t('admit_duration')}}</label>
+      </vs-col>
+      <div class="vx-col sm:w-1/2  w-full">
+        <vs-input class="w-full" v-model="data.admit_day" />
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+        <label>{{$t('admit_result')}}</label>
+      </vs-col>
+      <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
+        <div class="vx-row mb-6 w-full">
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="palliative">{{$t('palliative')}}</vs-radio>
+          </div>
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="continue_elsewhere">{{$t('continue_elsewhere')}}
+            </vs-radio>
+          </div>
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="die_hospital">{{$t('die_hospital')}}</vs-radio>
+          </div>
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="cure_over_endmonth">{{$t('cure_over_endmonth')}}
+            </vs-radio>
+          </div>
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="refuse_cure">{{$t('refuse_cure')}}</vs-radio>
+          </div>
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="die_at_home">{{$t('die_at_home')}}</vs-radio>
+          </div>
+          <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
+            <vs-radio v-model="data.admit_result" vs-value="unknown_result">{{$t('unknown_result')}}</vs-radio>
+          </div>
         </div>
-        <div class="vx-row mb-6">
-            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
-                <label>{{$t('admit_duration')}}</label>
-            </vs-col>
-            <div class="vx-col sm:w-1/2  w-full">
-                <vs-input class="w-full" v-model="admit_day" />
-            </div>
-        </div>
-        <div class="vx-row mb-6">
-            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
-                <label>{{$t('admit_result')}}</label>
-            </vs-col>
-            <vs-col vs-type="flex" vs-lg="10" vs-sm="8" vs-justify="center">
-                <div class="vx-row mb-6 w-full">
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="palliative">{{$t('palliative')}}</vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="continue_elsewhere">{{$t('continue_elsewhere')}}
-                        </vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="die_hospital">{{$t('die_hospital')}}</vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="cure_over_endmonth">{{$t('cure_over_endmonth')}}
-                        </vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="refuse_cure">{{$t('refuse_cure')}}</vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="die_at_home">{{$t('die_at_home')}}</vs-radio>
-                    </div>
-                    <div class="vx-col xl:w-1/6 lg:w-1/3 md:w-1/2">
-                        <vs-radio v-model="admit_result" vs-value="unknown_result">{{$t('unknown_result')}}</vs-radio>
-                    </div>
-                </div>
-            </vs-col>
-        </div>
-        <div class="vx-row mb-6">
-            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
-                <label>{{$t('follower_name')}}</label>
-            </vs-col>
-            <div class="vx-col sm:w-1/2  w-full">
-                <vs-input class="w-full" v-model="follower_name" />
-            </div>
-        </div>
-        <div class="vx-row mb-6">
-                <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
-                    <label>{{$t('follow_date')}}</label>
-                </vs-col>
-                <div class="vx-col sm:w-1/2  w-full">
-                    <datepicker :placeholder="$t('select_date')" v-model="follow_date"></datepicker>
-                </div>
-            </div>
-    </vx-card>
+      </vs-col>
+    </div>
+    <div class="vx-row mb-6">
+      <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+        <label>{{$t('follower_name')}}</label>
+      </vs-col>
+      <div class="vx-col sm:w-1/2  w-full">
+        <vs-input class="w-full" v-model="data.follower_name" />
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+        <label>{{$t('follow_date')}}</label>
+      </vs-col>
+      <div class="vx-col sm:w-1/2  w-full">
+        <datepicker :placeholder="$t('select_date')" v-model="data.follow_date"></datepicker>
+      </div>
+    </div>
+    <div class="vx-row mt-10 mr-10">
+      <div class="vx-col w-full" style="text-align: right">
+          <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+          <vs-button  color="warning" @click="$emit('close')">{{$t('cancel')}}</vs-button>
+      </div>
+    </div>
+
+  </div>
+  <!-- </vx-card> -->
 </div>
