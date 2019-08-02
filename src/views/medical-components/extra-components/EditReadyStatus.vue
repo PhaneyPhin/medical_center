@@ -34,6 +34,8 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import Datepicker from 'vuejs-datepicker';
 import service from '@/service/service';
 import { setTimeout } from 'timers';
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 export default {
   props: {
     isSidebarActive: {
@@ -58,6 +60,7 @@ export default {
   components: {
     Datepicker,
     VuePerfectScrollbar,
+    flatPickr
 
   },
     computed:{

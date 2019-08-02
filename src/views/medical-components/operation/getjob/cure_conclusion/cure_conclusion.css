@@ -1,0 +1,9 @@
+*{
+  font-size:10pt;
+}
+span{
+  text-align: right;
+}
+.danger{
+  color:red;
+}

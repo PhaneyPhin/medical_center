@@ -1,0 +1,59 @@
+<div class="vx-col w-full mb-base" >
+    <vx-card :title="$t('getjob_report')" v-if="!savePage">
+        <vs-table :stripe="true" class="w-full" search pagination max-items="10" :data="table_data">
+            <template slot="thead">
+                <vs-th sort-key="operation_id">{{$t('operation_id')}}</vs-th>
+                <vs-th style="width:15%;" sort-key="reported_time">{{ $t('reported_time')}}</vs-th>
+                <vs-th sort-key="location_name">{{ $t('location_name')}}</vs-th>
+                <vs-th sort-key="screening_symptom">{{ $t('screening_symptom')}}</vs-th>
+                <vs-th sort-key="patient_age">{{ $t('patient_age')}}</vs-th>
+                <vs-th sort-key="operation_unit_name">{{ $t('operating_unit_name')}}</vs-th>
+                <vs-th sort-key="operator_name">{{ $t('operator_name')}}</vs-th>
+                <vs-th>{{ $t('data_status')}}</vs-th>
+            </template>
+
+            <template slot-scope="{data}">
+                <vs-tr :key="index" v-for="(tr, index) in data">
+                    <vs-td :data="tr.operation_id">{{ tr.operation_id }}</vs-td>
+                    <vs-td :data="tr.reported_time">{{ tr.reported_time }}</vs-td>
+                    <vs-td :data="tr.location_name">{{ tr.location_name }}</vs-td>
+                    <vs-td>
+                        <vs-row vs-w="12">
+                            <div class="h-4 w-4 rounded-full mt-1 mr-2" :class="tr.screening_color"></div>
+                            {{tr.screening_id }} {{ tr.level_text }} {{ tr.screening_no }} {{ tr.symptom }}
+                        </vs-row>
+                    </vs-td>
+                    <vs-td :data="tr.patient_age">{{ tr.patient_age }}</vs-td>
+                    <vs-td :data="tr.operation_unit_name">{{ tr.operation_unit_name }}</vs-td>
+                    <vs-td :data="tr.operator_name">{{ tr.operator_name }}</vs-td>
+                    <vs-td style="width:18%;">
+                      <vs-row v-if="tr.cancel_status == 1" vs-type="flex" vs-justify="center">
+                          <vs-col vs-type="flex" vs-w="12" vs-justify="center" vs-align="center">
+                              <vs-button color="danger" type="filled" disabled>{{$t("cancel")}}</vs-button>
+                          </vs-col>
+                      </vs-row>
+                      <template v-else>
+                          <vs-row v-if="tr.operation_id" vs-type="flex" vs-justify="center">
+                              <vs-col vs-type="flex" vs-w="12" vs-justify="center" vs-align="center">
+                                  <vs-button color="rgb(25,217,255)"  type="filled" @click="save(tr)">{{$t("save_data")}}</vs-button>
+                              </vs-col>
+                          </vs-row>
+
+                          <template v-else>
+                              <vs-row vs-type="flex" vs-justify="center">
+                                  <vs-col vs-lg="6" vs-sm="12">
+                                      <vs-button color="success" @click="acceptjob(tr.emergency_reported_id)" type="filled">{{$t("accept")}}</vs-button>
+                                  </vs-col>
+                                  <vs-col vs-lg="6" vs-sm="12">
+                                      <vs-button color="danger" @click="canceljob(tr.emergency_reported_id)" type="filled">{{$t("decline")}}</vs-button>
+                                  </vs-col>
+                              </vs-row>
+                          </template>
+                      </template>
+                  </vs-td>
+                </vs-tr>
+            </template>
+        </vs-table>
+    </vx-card>
+    <get-job-tab v-if="savePage" :operation_id="selectedOperation_id"></get-job-tab>
+</div>

@@ -314,14 +314,7 @@
   .require{
     color: red;
   }
-  .vdp-datepicker input {
-    padding: .7rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    color: #626262;
-    width: 100%;
-  }
+
   .danger input {
     padding: .7rem;
     font-size: 1rem;

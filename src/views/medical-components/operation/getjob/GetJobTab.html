@@ -1,0 +1,20 @@
+<div class="vx-col w-full mb-base">
+  <vs-card>
+      <div slot="header">
+          <div class="btn-group my-4">
+              <vs-button type="line" v-for="(item,index) in tabs" :color="tab==item?'success':'dark'" @click="goto(item)">{{$t(item)}}</vs-button>
+            </div>
+      </div>
+        <div class="ml-10">
+            <general v-if="tab==tabs[0]" :operation_id="operation_id"></general>
+            <time-data v-if="tab==tabs[1]"></time-data>
+            <patient-data v-if="tab==tabs[2]"></patient-data>
+            <division-status v-if="tab==tabs[3]"></division-status>
+            <sending-decision v-if="tab==tabs[4]"></sending-decision>
+            <access-sending v-if="tab==tabs[5]"></access-sending>
+            <cure-result v-if="tab==tabs[6]"></cure-result>
+            <cure-conclusion v-if="tab==tabs[7]"></cure-conclusion>
+        </div>
+  </vs-card>
+
+</div>

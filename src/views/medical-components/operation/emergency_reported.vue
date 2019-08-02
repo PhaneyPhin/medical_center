@@ -329,7 +329,7 @@
                   <vs-td>
                     <div class="vx-row">
                       <div class="md:w-1/5">
-                        <vx-tooltip :text="$t('reported')"  position="left"> 
+                        <vx-tooltip :text="$t('reported')"  position="left">
                           <div class="h-4 w-4 rounded-full bg-success"></div>
                         </vx-tooltip>
                       </div>
@@ -716,7 +716,8 @@ export default {
         lon: "",
         zone: "",
         location_name: "",
-        place_detail: ""
+        place_detail: "",
+        reciever:JSON.stringify(service.getUser().gen_token.username)
       },
       edit_bodydata: {
         reporter_type: null,

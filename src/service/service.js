@@ -1,11 +1,22 @@
-import Api from '@/service/api'
+// import Api from '@/service/api'
 import axios from 'axios'
+// import { read } from 'fs';
 // import Axios from 'axios';
 
 export default {
-    getData (url) {
+  // url:`http://203.150.210.26:3007/`
+  url: `http://10.255.248.92:3007/`,
+  getData (url) {
         return new Promise((resolve,reject)=>{
-          Api().get(url).then(result=>{
+          axios.create({
+            baseURL: this.url,
+            withCredentials: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token':this.getToken()
+            }
+          }).get(url).then(result=>{
             resolve(result.data);
           },err=>{
             reject(err);
@@ -14,7 +25,15 @@ export default {
     },
     postData(url,data){
       return new Promise((resolve,reject)=>{
-        Api().post(url,JSON.stringify(data)).then(result=>{
+        axios.create({
+          baseURL: this.url,
+          withCredentials: false,
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token':this.getToken()
+          }
+        }).post(url,JSON.stringify(data)).then(result=>{
           resolve(result.data);
         },err=>{
           reject(err);
@@ -23,7 +42,15 @@ export default {
     },
     deleteData(url){
       return new Promise((resolve,reject)=>{
-        Api().delete(url).then(result=>{
+        axios.create({
+          baseURL: this.url,
+          withCredentials: false,
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token':this.getToken()
+          }
+        }).delete(url).then(result=>{
           resolve(result.data);
         },err=>{
           reject(err);
@@ -47,6 +74,63 @@ export default {
         })
       })
     },
+    prefix:"xsdfjksldfjlsdfkjsldfkj",
+    tokenText:"getmytoken",
+    setToken(token){
+      sessionStorage.setItem(this.tokenText,this.prefix+token);
+    },
+    getToken(){
+      var token= sessionStorage.getItem(this.tokenText);
+      if(token)
+      {
+        return token.substr(this.prefix.length);
+      }else{
+        return "";
+      }
+
+    },
+    getUser(){
+      return this.decodeToken(this.getToken());
+    },
+    isLoggedIn(){
+      // alert(2222)
+      // alert((this.prefix+this.getToken()))
+      return (this.checkLogin(this.prefix+this.getToken()))
+
+
+    },
+    checkLogin(token){
+      // var token="203.150.210.26:3007/login?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnZW5fdG9rZW4iOnsidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiIxIn0sImlhdCI6MTU2MzYxNzE1MiwiZXhwIjoxNjYzNjE3MTUxfQ.m_ko3pgVjwUOeRCiNNGoeXPge7LusJinaNnZNNTS7qg";
+
+
+       if(this.decodeToken(token.substr(this.prefix.length))){
+         return true;
+       }
+       return false;
+    },
+    // decodeToken(token){
+    //   try{
+    //     var playload = JSON.parse(atob(token.split('.')[1]));
+    //     return playload;
+    //   }catch(e){
+    //     return "";
+    //   }
+
+    // },
+
+    decodeToken (token) {
+      try{
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+      }catch(e){
+        return "";
+      }
+  },
     prefixs:[
       {id:1,th:"นาย",en:"Mr"},
       {id:2,th:"นางสาว",en:"Miss"}
@@ -57,6 +141,10 @@ export default {
       {id:3,th:"ศาสนาฮินดู",en:"Hindu"},
       {id:4,th:"ศาสนาคริสต์",en:"Christ"},
       {id:5,th:"อื่นๆ",en:"Other"}
+    ],
+    car_type:[
+      {value:0,text:"ALS"},
+      {value:1,text:"BLS"}
     ],
     blood_groups:[
       {value:"",text:""},
@@ -130,4 +218,26 @@ export default {
       {id:4,value:"สารเหตุอื่น"}
 
     ],
+    screenings:[
+      {id:1,level_text:"red",screening_color:"bg-danger"},
+      {id:2,level_text:"yellow",screening_color:"bg-warning"},
+      {id:3,lavel_text:"green",screening_color:"bg-success"},
+      {id:4,level_text:"white",screening_color:""},
+      {id:5,level_text:"black",screening_color:""}
+    ],
+    content_types:[
+      "ทางจิตเวช","ปัญหาทางกรอบครัว","ปัญหาทางเพศ","ปัญหาการทำงาน","ปัญหาการเรียน","ปัญหาการปรับตัว","ปัญหายสเสพติด","ปัญหาพฤติกรรมเด็กวัยรุ่น","โทรศัพธ์ลามก","Silence Call","ภาวะเครียด","โรคทางกาย","ปัญหาบริการต่าง ของโรงพยาบาล","อื่นๆ"
+    ],
+
+    perform_results:[
+      {value:"1",text:"ไม่ประส่งค์ไปโรงพยาบาล",type:"a"},
+      {value:"2",text:"ไม่มีผู้บาดเจ็บ",type:"a"},
+      {value:"3",text:"นอกพื้นที่กรุงเทพ",type:"a"},
+      {valule:"4",text:"ประสานผ่านศูนย์จัดอาสาดำเนินการ",type:"a"},
+      {value:"5",text:"รถเพียงพอแล้ว",type:"a"},
+      {value:"6",text:"ประสารผ่านศูนย์จัดอาสารดำเนินการ",type:"a"},
+      {value:"7",text:"แจ้งเท็จ",type:"b"},
+      {value:"8",text:"มีการเคลื่อนย้ายไปก่อน",type:"b"},
+
+    ]
 }

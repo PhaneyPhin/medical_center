@@ -1,0 +1,43 @@
+<div class="vx-col w-full mb-base">
+    <vx-card :title="$t('sending_decision')">
+        <div class="vx-row mb-6">
+            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+                <label>{{$t('hospital_name')}}</label>
+            </vs-col>
+            <div class="vx-col sm:w-1/2  w-full">
+                <vs-select class="w-full" v-model="hospital_name" :disabled="hospital_list.length == 0">
+                    <vs-select-item :key="index" :value="item.value" :text="item.label"
+                        v-for="(item,index) in hospital_list" />
+                </vs-select>
+            </div>
+        </div>
+        <div class="vx-row mb-6">
+            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+                <label>{{$t('hospital_type')}}</label>
+            </vs-col>
+            <div class="vx-col sm:w-1/6  w-full">
+                <vs-radio v-model="hospital_type" vs-value="1">{{$t('public_hospital')}}</vs-radio>
+            </div>
+            <div class="vx-col sm:w-1/6  w-full">
+                <vs-radio v-model="hospital_type" vs-value="2">{{$t('private_hospital')}}</vs-radio>
+            </div>
+        </div>
+        <div class="vx-row mb-6">
+            <vs-col vs-type="flex" vs-lg="2" vs-sm="4" vs-justify="center">
+                <label>{{$t('reason')}}</label>
+            </vs-col>
+            <div class="vx-col sm:w-1/6  w-full">
+                <vs-checkbox v-model="reason1">{{$t('potiential_treated')}}</vs-checkbox>
+            </div>
+            <div class="vx-col sm:w-1/6  w-full">
+                <vs-checkbox v-model="reason2">{{$t('nearest_hospital')}}</vs-checkbox>
+            </div>
+            <div class="vx-col sm:w-1/6  w-full">
+                <vs-checkbox v-model="reason3">{{$t('have_insurrance')}}</vs-checkbox>
+            </div>
+            <div class="vx-col sm:w-1/6  w-full">
+                <vs-checkbox v-model="reason4">{{$t('have_treatment_history')}}</vs-checkbox>
+            </div>
+        </div>
+    </vx-card>
+</div>

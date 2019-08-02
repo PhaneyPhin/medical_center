@@ -14,6 +14,14 @@
 	</div>
 </template>
 <style>
+    .vdp-datepicker input {
+    padding: .7rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #626262;
+    width: 100%;
+  }
     .error{
     color:red;
      font-size:80%;

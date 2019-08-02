@@ -19,9 +19,9 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
-import auth from "@/auth/authService";
-
-import firebase from 'firebase/app'
+// import auth from "@/auth/authService";
+import service from '@/service/service';
+// import firebase from 'firebase/app'
 import 'firebase/auth'
 
 Vue.use(Router)
@@ -178,7 +178,38 @@ const router = new Router({
                     meta: {
                         rule: 'editor'
                     }
+                },{
+                  path: '/operation/command',
+                  name: 'dashboardAnalytics',
+                  component: () => import('./views/medical-components/operation/command.vue'),
+                  meta: {
+                      rule: 'editor'
+                  }
+              }, {
+                path: '/operation/control',
+                name: 'Operation control',
+                component: () => import('./views/medical-components/operation/operation_control.vue'),
+                meta: {
+                    rule: 'editor'
+                }
+             },
+              {
+                  path: '/operation/call',
+                  name: 'dashboardAnalytics',
+                  component: () => import('./views/medical-components/operation/call_center.vue'),
+                  meta: {
+                      rule: 'editor'
+                  }
                 }, {
+                  path: '/operation/getjob',
+                  name: 'dashboardAnalytics',
+                  component: () => import('./views/medical-components/operation/getjob/getjob.vue'),
+                  meta: {
+                      rule: 'editor'
+                  }
+              }
+              ,
+               {
                     path: '/hospital/hospital_transportation',
                     name: 'dashboardAnalytics',
                     component: () => import('./views/DashboardECommerce.vue'),
@@ -215,7 +246,14 @@ const router = new Router({
                         rule: 'admin'
                     }
                 },
-
+                {
+                    path: '/ready_status',
+                    name: 'dashboardECommerce',
+                    component: () => import('./views/medical-components/ready_status.vue'),
+                    meta: {
+                        rule: 'admin'
+                    }
+                },
 
                 // =============================================================================
                 // Application Routes
@@ -1333,7 +1371,7 @@ const router = new Router({
                     }
                 },
                 {
-                    path: '/pages/login',
+                    path: '/login',
                     name: 'pageLogin',
                     component: () => import('@/views/pages/Login.vue'),
                     meta: {
@@ -1431,30 +1469,34 @@ router.afterEach(() => {
 })
 
 router.beforeEach((to, from, next) => {
-    firebase.auth().onAuthStateChanged(() => {
+    // firebase.auth().onAuthStateChanged(() => {
 
-        // get firebase current user
-        const firebaseCurrentUser = firebase.auth().currentUser;
+    //     // get firebase current user
+    //     const firebaseCurrentUser = firebase.auth().currentUser;
 
         if (
-            to.path === "/pages/login" ||
+            to.path === "/login" ||
             to.path === "/pages/forgot-password" ||
             to.path === "/pages/error-404" ||
             to.path === "/pages/error-500" ||
             to.path === "/pages/register" ||
             to.path === "/callback" ||
             to.path === "/pages/comingsoon" ||
-            (auth.isAuthenticated() || firebaseCurrentUser)
+            (service.isLoggedIn())
         ) {
             return next();
+        }else{
+          router.push('/login');
         }
 
-        router.push({ path: '/pages/login', query: { to: to.path } })
-        // Specify the current path as the customState parameter, meaning it
-        // will be returned to the application after auth
-        // auth.login({ target: to.path });
+    //     router.push({ path: '/pages/login', query: { to: to.path } })
+    //     // Specify the current path as the customState parameter, meaning it
+    //     // will be returned to the application after auth
+    //     // auth.login({ target: to.path });
 
-    });
+    // });
+
+    // next();
 
 });
 

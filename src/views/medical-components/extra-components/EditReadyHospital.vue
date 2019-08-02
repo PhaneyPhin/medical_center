@@ -21,89 +21,73 @@
         <div class="vx-col w-full mb-base" style="padding:20px">
             <!-- <pre>{{operator}}</pre> -->
             <div class="mt-3">
-                <div class="vx-row">
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('hospital_name')}}</label>
 
-                         </div>
-                         <div class="vx-col  md:w-2/3 w-full mt-5">
-                            <vs-select autocomplete class="w-full" v-model="newReadyHospital.hospital_id" :danger="invalid_hospital.hospital">
-                              <vs-select-item :key="index" :value="item.hospital_id" :text="item.hospital_name" v-for="(item,index) in hospitals" />
+
+                 <div class="vx-row">
+
+                         <div class="vx-col w-full mt-5">
+                            <label>{{$t('operating_unit_name')}}</label>
+                           <vs-select autocomplete class="w-full" :danger="invalid_hospital.hospital_id" v-model="newHospital.hospital_id" disabled>
+                            <vs-select-item :key="index" :value="item.hospital_id" :text="item.hospital_name" v-for="(item,index) in hospitals"  />
                             </vs-select>
-                            <div class="error" v-if="invalid_hospital.hospital">{{$t("hospital_alert")}}</div>
+                            <div class="error" v-if="invalid_hospital.operatingunit">{{$t("hospital_alert")}}</div>
                          </div>
                        </div>
-                  </div>
+                        <div class="vx-row">
 
-                </div>
-                <div class="vx-row">
+                         <div class="vx-col  md:w-full w-full mt-5">
+                         <label>{{$t('start_date')}}</label>
 
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('start_date')}}</label>
-
+                          <div class="vx-row">
+                            <div class="vx-col md:w-2/3 w-ful">
+                                <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_hospital.start_date}" v-model="newHospital.start_date"></datepicker>
+                                <div class="error" v-if="invalid_hospital.start_date">{{$t("start_date_alert")}}</div>
+                            </div>
+                            <div class="vx-col md:w-1/3">
+                                 <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newHospital.start_time" placeholder="Choose time" />
+                            </div>
+                          </div>
                          </div>
-                         <div class="vx-col  md:w-1/2 w-full mt-5">
-                          <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_hospital.new_start_date}" v-model="newReadyHospital.new_start_date"></datepicker>
-                          <div class="error" v-if="invalid_hospital.new_start_date">{{$t("start_date_alert")}}</div>
-                         </div>
 
-                         <div class="vx-col  md:w-1/3 w-full mt-5">
-                            <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.new_start_time" placeholder="Choose time" />
-                         </div>
+
                        </div>
-                  </div>
-                  <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
+                        <div class="vx-row">
+
+                         <div class="vx-col w-full mt-5">
                            <label>{{$t('end_date')}}</label>
+                            <div class="vx-row">
+                              <div class="vx-col md:w-2/3">
+                                <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full" :class="{'danger':invalid_hospital.end_date||invalid_hospital.end_date_less}" v-model="newHospital.end_date"></datepicker>
+                                <div class="error" v-if="invalid_hospital.end_date">{{$t('end_date_alert')}}</div>
+                                <div class="error" v-if="!invalid_hospital.end_date&&invalid_hospital.end_date_less">{{$t("end_date_less")}}</div>
 
-                         </div>
-                         <div class="vx-col  md:w-1/2 w-full mt-5">
-                            <datepicker format="yyyy-MM-dd"  placeholder="Select Date" class="w-full"  :class="{'danger':invalid_hospital.new_end_date||invalid_hospital.new_end_date_less}" v-model="newReadyHospital.new_end_date"></datepicker>
-                            <div class="error" v-if="invalid_hospital.new_end_date">{{$t('end_date_alert')}}</div>
-                            <div class="error" v-if="!invalid_hospital.new_end_date&&invalid_hospital.new_end_date_less">{{$t("end_date_less")}}</div>
+                              </div>
+                              <div class="vx-col md:w-1/3">
+                                <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newHospital.end_time" placeholder="Choose time" />
+                              </div>
+                            </div>
                          </div>
 
-                         <div class="vx-col  md:w-1/3 w-full mt-5">
-                          <flat-pickr :config="configdateTimePicker" class="w-full" v-model="newReadyHospital.new_end_time" placeholder="Choose time" />
-                         </div>
                        </div>
-                  </div>
-                </div>
+                          <div class="vx-row">
 
-                <div class="vx-row">
-                  <div class="vx-col md:w-1/2 w-full mt-5">
+                            <div class="vx-col md:w-full mt-5">
+                              <label>{{$t('reason')}}</label>
+
+                              <vs-select class="w-full" v-model="newHospital.reason" :danger="invalid_hospital.reason">
+                                <vs-select-item :key="index" :value="item.id" :text="item.value" v-for="(item,index) in reasons" />
+                                </vs-select>
+                                <div class="error" v-if="invalid_hospital.reason">{{$t("reason_alert")}}</div>
+                            </div>
+                          </div>
+
                        <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('reason')}}</label>
 
-                         </div>
-                         <div class="vx-col  md:w-5/6 w-full mt-5">
-                           <vs-select class="w-full" v-model="newReadyHospital.reason"  :danger="invalid_hospital.reason">
-                            <vs-select-item :key="index" :value="item.id" :text="item.value" v-for="(item,index) in reason_hospitals" />
-                            </vs-select>
-                           <div class="error" v-if="invalid_hospital.reason">{{$t("reason_alert")}}</div>
+                         <div class="vx-col  md:w-full w-full mt-5">
+                             <label>{{$t('detail_')}}</label>
+                            <vs-textarea class="w-full" v-model="newHospital.detail"/>
                          </div>
                        </div>
-                  </div>
-                   <div class="vx-col md:w-1/2 w-full mt-5">
-                       <div class="vx-row">
-                         <div class="vx-col  md:w-1/6 w-full mt-5" style="text-align:right;padding:5px">
-                           <label>{{$t('detail_')}}</label>
-
-                         </div>
-                         <div class="vx-col  md:w-5/6 w-full mt-5">
-                            <vs-textarea class="w-full" v-model="newReadyHospital.detail"/>
-                         </div>
-                       </div>
-                  </div>
-
-                </div>
-
               </div>
         </div>
     </VuePerfectScrollbar>
@@ -126,7 +110,6 @@ import { setTimeout } from 'timers';
 import moment from "moment";
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
-// import moment from "moment";
 export default {
   props: {
     isSidebarActive: {
@@ -140,28 +123,27 @@ export default {
   },
   data() {
     return {
-      configdateTimePicker: {
-              enableTime: true,
-              enableSeconds: true,
-              noCalendar: true
-            },
-      reason_hospitals:service.reason_hospitals,
-      newReadyHospital:{},
-      submitted:false,
-      hospitals:[],
-      operating_units:[],
         addNewDataSidebar: false,
         settings: { // perfectscrollbar settings
           maxScrollbarLength: 60,
           wheelSpeed: .60,
+      },
+      hospitals:[],
+      reasons:service.reasons,
+      original:{},
+      newHospital:{},
+      configdateTimePicker: {
+        enableTime: true,
+        enableSeconds: true,
+        noCalendar: true
       },
     }
   },
 
   components: {
     Datepicker,
-    flatPickr,
     VuePerfectScrollbar,
+    flatPickr
 
   },
     computed:{
@@ -173,32 +155,37 @@ export default {
       set(val) {
         if(!val) {
           this.$emit('closeSidebar');
-          this.initValues();
+          // this.initValues();
         }
       }
     },
     invalid_hospital(){
        var c=type=>{
-         return this.submitted&&this.body_hospital[type]=="";
+         return this.submitted&&this.body_operation[type]=="";
        };
-       return {hospital:c("hospital_id"),new_start_date:c("new_start_date"),new_end_date:c("new_end_date"),reason:c("reason"),
-        new_end_date_less:this.submitted&&!moment(this.body_hospital.new_end_date).isAfter(monent(this.body_hospital.new_start_date))}
+       return {hospital_id:c("hospital_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
+        end_date_less:this.submitted&&!moment(this.body_operation.end_date).isAfter(moment(this.body_operation.start_date))}
      },
-     isInvalid_hospital(){
-       return this.invalid_hospital.hospital||this.invalid_hospital.new_start_date||this.invalid_hospital.new_end_date||this.invalid_hospital.new_end_date_less||this.invalid_hospital.reason;
+       isinvalid_hospital(){
+       return this.invalid_hospital.hospital_id||this.invalid_hospital.start_date||this.invalid_hospital.end_date||this.invalid_hospital.end_date_less||this.invalid_hospital.reason;
      },
-      body_hospital(){
 
-        var data=this.newReadyHospital;
-        data.new_start_time=data.new_start_time==""?"00:00:00":data.new_start_time;
-        data.new_end_time=data.new_end_time==""?"00:00:00":data.new_end_time;
-        data.new_start_date=data.new_start_date!=""?moment(data.new_start_date).format("YYYY-MM-DD")+'T'+data.new_start_time:"";
-        data.new_end_date=data.new_end_date!=""?moment(data.new_end_date).format("YYYY-MM-DD")+'T'+data.new_end_time:"";
+    body_operation(){
+        var data=this.newHospital;
+        data.start_time=data.start_time==""?"00:00:00":data.start_time;
+        data.end_time=data.end_time==""?"00:00:00":data.end_time;
+        data.start_date=data.start_date!=""?moment(data.start_date).format("YYYY-MM-DD")+'T'+data.start_time:"";
+        data.end_date=data.end_date!=""?moment(data.end_date).format("YYYY-MM-DD")+'T'+data.end_time:"";
         return data;
-     }
+     },
+
    },
    created(){
-      service.getData('get_hospital_master').then((result)=>{
+     this.init();
+   },
+   methods: {
+     init(){
+       service.getData('get_hospital_master').then((result)=>{
          if(!result.code){
            this.hospitals=result.data;
          }else{
@@ -207,49 +194,54 @@ export default {
        },err=>{
          this.$swal('connection error','','error');
        })
-   },
-   methods: {
+     },
+     save(){
 
-      save(){
-          this.submitted=true;
-          if(!this.isInvalid_hospital){
-            this.$vs.loading({
-                  background: this.backgroundLoading,
-                  color: this.colorLoading,
-                  container: "#button-with-loading",
-                  scale: 0.45
-            })
+         this.submitted=true;
 
-            service.postData('update_ready_hospital',this.body_hospital).then((result)=>{
-              if(!result.code){
+         if(!this.isinvalid_hospital){
+          console.log(this.original);
+           service.postData('update_ready_hospital',{
+             hospital_id:this.original.hospital_id,
+             start_date:this.original.start_date,
+             end_date:this.original.end_date,
+             new_start_date:this.body_operation.start_date,
+             new_end_date:this.body_operation.end_date,
+             reason:this.body_operation.reason,
+             detail:this.body_operation.detail
+           }).then((result)=>{
+           if(!result.code){
+              this.isSidebarActiveLocal=(false);
+             this.$swal(this.$t('success_title'),'','success').then((result)=>{
+                 this.init();
+                this.submitted=false;
 
-                 this.$vs.loading.close("#button-with-loading > .con-vs-loading")
-                this.$swal(this.$t('success_title'),'','success');
-                 this.isSidebarActiveLocal=false;
-                // this.getReadyHospital();
-              }else{
-                 this.$vs.loading.close("#button-with-loading > .con-vs-loading")
-                 this.isSidebarActive=false;
-                this.$swal(result.message,'','error').then((result)=>{
-                  this.isSidebarActive=true;
-                });
-              }
-            },err=>{
-               this.$vs.loading.close("#button-with-loading > .con-vs-loading")
-              this.$swal('connection error','','error');
-            })
-          }
+                // this.$swal(this.$t('success_title'),'','success');
+                this.init();
+             });
+
+           }else{
+             this.$swal(result.message,'','error');
+           }
+         },err=>{
+           this.$swal('connection error','','error');
+         })
+         }
       },
+
     },
   watch: {
     ReadyHospital(val){
-      // alert(JSON.stringify(val))
-        this.newReadyHospital=val;
-        this.newReadyHospital.new_start_date=moment(val.start_date).format('YYYY-MM-DD');
-        this.newReadyHospital.new_start_time=moment(val.start_date).format('HH:mm:ss');
-        this.newReadyHospital.new_end_date=moment(val.end_date).format('YYYY-MM-DD');
-        this.newReadyHospital.new_end_time=moment(val.end_date).format('HH:mm:ss');
-     },
+
+      this.original=JSON.parse(JSON.stringify(val));
+      console.log(val);
+      this.newHospital=val;
+      // conole.log(val);
+      this.newHospital.start_time=moment(val.start_date).format('HH:mm:ss');
+       this.newHospital.end_time=moment(val.end_date).format('HH:mm:ss');
+       console.log(this.newHospital);
+    }
+
     }
 
 }
@@ -263,7 +255,7 @@ export default {
 
   /deep/ .vs-sidebar {
     z-index: 52010;
-    width: 80%;
+    width: 400px;
     max-width: 90vw;
 
     .img-upload {

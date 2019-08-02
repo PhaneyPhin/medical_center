@@ -108,7 +108,7 @@
                       <vs-th sort-key="start_date">{{$t('start_date')}}</vs-th>
                       <vs-th sort-key="end_date">{{$t('end_date')}}</vs-th>
 
-                      <vs-th sort-key="reason">{{$t('reason')}}</vs-th>
+                      <vs-th sort-key="reason_show">{{$t('reason')}}</vs-th>
                       <vs-th sort-key="detail">{{$t('detail')}}</vs-th>
                        <vs-th>{{$t('view')}}</vs-th>
                       <vs-th>{{$t("edit")}}</vs-th>
@@ -130,8 +130,8 @@
                           {{ tr.end_date_show }}
                         </vs-td>
 
-                        <vs-td :data="tr.reason">
-                          {{ tr.reason }}
+                        <vs-td :data="tr.reason_show">
+                          {{ tr.reason_show }}
                         </vs-td>
                         <vs-td :data="tr.detail">
                           {{ tr.detail }}
@@ -254,7 +254,7 @@
                       <vs-th sort-key="start_date">{{$t('start_date')}}</vs-th>
                       <vs-th sort-key="end_date">{{$t('end_date')}}</vs-th>
 
-                      <vs-th sort-key="reason">{{$t('reason')}}</vs-th>
+                      <vs-th sort-key="reason_show">{{$t('reason')}}</vs-th>
                       <vs-th sort-key="detail">{{$t('detail')}}</vs-th>
                        <vs-th>{{$t('view')}}</vs-th>
                       <vs-th>{{$t("edit")}}</vs-th>
@@ -268,16 +268,16 @@
                           {{tr.hospital_name}}
                         </vs-td>
 
-                        <vs-td :data="tr.start_date">
+                        <vs-td :data="tr.start_date_show">
                           {{ tr.start_date }}
                         </vs-td>
 
-                        <vs-td :data="tr.end_date">
+                        <vs-td :data="tr.end_date_show">
                           {{ tr.end_date }}
                         </vs-td>
 
-                        <vs-td :data="tr.reason">
-                          {{ tr.reason }}
+                        <vs-td :data="tr.reason_show">
+                          {{ tr.reason_show }}
                         </vs-td>
                         <vs-td :data="tr.detail">
                           {{ tr.detail }}
@@ -347,7 +347,7 @@ import EditReadyOperatingUnit from './extra-components/EditReadyOperatingUnit.vu
 import EditReadyHospital from './extra-components/EditReadyHospital.vue';
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
-import moment, { invalid } from "moment";
+import moment from "moment";
 export default {
   components: {
     EditReadyOperatingUnit,
@@ -399,14 +399,14 @@ export default {
          return this.submitted&&this.body_hospital[type]=="";
        };
        return {hospital:c("hospital_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_hospital.end_date).isAfter(monent(this.body_hospital.start_date))}
+        end_date_less:this.submitted&&!moment(this.body_hospital.end_date).isAfter(moment(this.body_hospital.start_date))}
      },
      invalid_operatingunit(){
        var c=type=>{
          return this.submitted&&this.body_operation[type]=="";
        };
        return {operatingunit:c("operating_unit_id"),start_date:c("start_date"),end_date:c("end_date"),reason:c("reason"),
-        end_date_less:this.submitted&&!moment(this.body_operation.end_date).isAfter(monent(this.body_operation.start_date))}
+        end_date_less:this.submitted&&!moment(this.body_operation.end_date).isAfter(moment(this.body_operation.start_date))}
      },
      isInvalid_hospital(){
        return this.invalid_hospital.hospital||this.invalid_hospital.start_date||this.invalid_hospital.end_date||this.invalid_hospital.end_date_less||this.invalid_hospital.reason;
@@ -468,6 +468,13 @@ export default {
        service.getData('/get_ready_hospital').then((result)=>{
          if(!result.code){
           this.ready_hospitals=JSON.parse(JSON.stringify(result.data).replace(/\:null/gi, "\:\"\""));
+          this.ready_hospitals=this.ready_hospitals.map((item)=>{
+           item.start_date_show=moment(item.start_date).format('DD/MM/YYYY HH:mm:ss');
+           item.end_date_show=moment(item.end_date).format('DD/MM/YYYY HH:mm:ss');
+           var reason=this.reason_hospitals.filter((reason)=>reason.id==item.reason);
+           item.reason_show=reason[0].value
+           return item;
+         })
          }else{
            this.$swal(result.message,'','error');
          }
@@ -483,6 +490,8 @@ export default {
          this.ready_operatingunits=this.ready_operatingunits.map((item)=>{
            item.start_date_show=moment(item.start_date).format('DD/MM/YYYY HH:mm:ss');
            item.end_date_show=moment(item.end_date).format('DD/MM/YYYY HH:mm:ss');
+           var reason=this.reasons.filter((reason)=>reason.id==item.reason);
+           item.reason_show=reason[0].value
            return item;
          })
        }else{

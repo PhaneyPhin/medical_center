@@ -1,0 +1,124 @@
+<div>
+  <div class="vx-row ml-10 mr-10 mt-5">
+
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("reported_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-2/3">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/3">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+      </div>
+      <!-- <vs-select autocomplete class="w-full" v-model="data.operating_unit_id">
+          <vs-select-item :key="index" :value="item.operating_unit_id" :text="item.operating_unit_name" v-for="(item,index) in operating_units" />
+      </vs-select> -->
+    </div>
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("commad_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-2/3">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/3">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vx-row  ml-10 mr-10 mt-5">
+
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("leave_base_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-1/2">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/4">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+        <div class="vx-col md:w-1/4">
+
+          <vs-button class="w-full">{{$t("now")}}</vs-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("arrive_accident_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-1/2">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/4">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+        <div class="vx-col md:w-1/4">
+
+          <vs-button class="w-full">{{$t("now")}}</vs-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vx-row  ml-10 mr-10 mt-5">
+
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("leave_accident_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-1/2">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/4">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+        <div class="vx-col md:w-1/4">
+
+          <vs-button class="w-full">{{$t("now")}}</vs-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("arrive_hospital_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-1/2">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/4">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+        <div class="vx-col md:w-1/4">
+
+          <vs-button class="w-full">{{$t("now")}}</vs-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vx-row  ml-10 mr-10 mt-5">
+
+    <div class="vx-col md:w-1/2">
+      <label>{{$t("arrive_base_time")}}</label>
+      <div class="vx-row">
+        <div class="vx-col md:w-1/2">
+          <flat-pickr  class="w-full" placeholder="chose date" />
+          <!-- <datepicker format="yyyy-MM-dd" v-model="dob" style="width:100%" class="w-full"></datepicker> -->
+        </div>
+        <div class="vx-col md:w-1/4">
+          <flat-pickr :config="configdateTimePicker" class="w-full" placeholder="Choose time" />
+        </div>
+        <div class="vx-col md:w-1/4">
+
+          <vs-button class="w-full">{{$t("now")}}</vs-button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

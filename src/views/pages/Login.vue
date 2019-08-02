@@ -91,7 +91,7 @@
 </template>
 
 <script>
-
+import service from '@/service/service';
 export default {
     data() {
         return {
@@ -104,6 +104,20 @@ export default {
         validateForm() {
             return !this.errors.any() && this.email != '' && this.password != '';
         },
+    },
+    created(){
+      if(this.$route.query.token){
+        var token=this.$route.query.token;
+        if(service.checkLogin(service.prefix+token)){
+          service.setToken(token);
+          this.$router.push('/home');
+
+        }else{
+          window.location.href="http://203.150.210.26:3003";
+        }
+      }else{
+        window.location.href="http://203.150.210.26:3003";
+      }
     },
     methods: {
         login() {

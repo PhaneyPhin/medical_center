@@ -1,0 +1,117 @@
+<div>
+    <div class="vx-row ml-10 mr-10 mt-5">
+
+        <div class="vx-col md:w-1/2">
+          <label>{{$t("service_unit")}}</label>
+          <vs-select autocomplete class="w-full" v-model="data.operating_unit_id">
+              <vs-select-item :key="index" :value="item.operating_unit_id" :text="item.operating_unit_name" v-for="(item,index) in operating_units" />
+          </vs-select>
+        </div>
+        <div class="vx-col md:w-1/2">
+          <label>{{$t("car_type")}}</label>
+          <vs-select class="w-full" v-model="data.car_type">
+              <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in car_types" />
+          </vs-select>
+        </div>
+
+      </div>
+      <div class="vx-row ml-10 mr-10 mt-5">
+
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("zone")}}</label>
+            <vs-input class="w-full" v-model="data.zone"/>
+          </div>
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("police_office")}}</label>
+            <vs-input class="w-full"/>
+          </div>
+
+      </div>
+      <div class="vx-row ml-10 mr-10 mt-5">
+
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("operation_id")}}</label>
+            <vs-input class="w-full" value="1255" disabled/>
+          </div>
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("plate_number")}}</label>
+            <vs-input class="w-full"/>
+          </div>
+
+      </div>
+      <div class="vx-row ml-10 mr-10 mt-5">
+
+          <div class="vx-col md:w-1/4">
+            <label>{{$t("officer1")}}</label>
+            <vs-input class="w-full" v-model="data.officer1" />
+          </div>
+          <div class="vx-col md:w-1/4">
+            <label>{{$t("officer2")}}</label>
+            <vs-input class="w-full" v-model="data.officer2"/>
+          </div>
+          <div class="vx-col md:w-1/4">
+            <label>{{$t("officer3")}}</label>
+            <vs-input class="w-full" v-model="data.officer3" />
+          </div>
+          <div class="vx-col md:w-1/4">
+            <label>{{$t("officer4")}}</label>
+            <vs-input class="w-full" v-model="data.officer4"/>
+          </div>
+      </div>
+      <div class="vx-row ml-10 mr-10 mt-5">
+        <div class="vx-col md:w-1/3" style="text-align: center">
+            <label>{{$t("perform_result1")}}</label>
+        </div>
+        <div class="vx-col md:w-2/3">
+          <div class="vx-row">
+              <div class="vx-col md:w-1/2">
+                <vs-radio v-model="data.result_type" vs-value="a">{{$t("meet_accidence")}}</vs-radio>
+              </div>
+              <div class="vx-col md:w-1/2">
+                <vs-radio v-model="data.result_type" vs-value="b">{{$t("not_meet_accidence")}}</vs-radio>
+              </div>
+          </div>
+          <div class="vx-row mt-5">
+              <div class="vx-col md:w-1/2 mt-3" v-for="(item,index) in perform_result_view">
+                  <vs-radio v-model="data.perform_result" :vs-value="item.value">{{item.text}}</vs-radio>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="vx-row ml-10 mr-10 mt-5">
+
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("performance_inside_zone")}}</label>
+            <vs-input class="w-full" v-model="data.performance_inside_zone" />
+          </div>
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("accidence_place")}}</label>
+            <vs-input class="w-full" v-model="data.place_detail"/>
+          </div>
+
+      </div>
+      <div class="vx-row ml-10 mr-10 mt-5">
+
+          <div class="vx-col md:w-1/2">
+            <label>{{$t("screening_minor")}}</label>
+            <vs-select autocomplete class="w-full" v-model="data.screening_id">
+                <vs-select-item :key="index" :value="item.screening_id" :text="item.text" v-for="(item,index) in screeings_view" />
+            </vs-select>
+          </div>
+          <div class="vx-col md:w-1/2">
+
+            <label>{{$t("screening_minor")}}</label>
+            <vs-select autocomplete class="w-full" v-model="screening_minor">
+                <vs-select-item :key="index" :value="item" :text="item.text" v-for="(item,index) in screening_minors_view" />
+            </vs-select>
+          </div>
+
+      </div>
+      <div class="vx-row mt-10 mr-10">
+        <div class="vx-col w-full" style="text-align: right">
+            <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+            <vs-button  color="warning">{{$t('cancel')}}</vs-button>
+        </div>
+      </div>
+
+</div>
