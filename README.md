@@ -1,5 +1,9 @@
 # modern
+## Getting start
 
+```
+ git clone https://github.com/PhaneyPhin/medical_center.git
+```
 ## Project setup
 ```
 npm install
