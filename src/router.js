@@ -70,84 +70,84 @@ const router = new Router({
                     }
                 }, {
                     path: '/registration/operator',
-                    name: 'dashboardAnalytics',
+                    name: 'operator',
                     component: () => import('./views/medical-components/operator.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
                     path: '/registration/vehicle',
-                    name: 'dashboardAnalytics',
+                    name: 'vehicle',
                     component: () => import('./views/medical-components/vehicle.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
                     path: '/registration/operation_unit',
-                    name: 'dashboardAnalytics',
+                    name: 'operation_unit',
                     component: () => import('./views/medical-components/operating_unit.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
                     path: '/registration/proffessional',
-                    name: 'dashboardAnalytics',
+                    name: 'professional',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
                     path: '/registration/pharmacy',
-                    name: 'dashboardAnalytics',
+                    name: 'pharmacy',
                     component: () => import('./views/medical-components/pharmacy.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 }, {
                     path: '/registration/volunteer',
-                    name: 'dashboardAnalytics',
+                    name: 'volunteer',
                     component: () => import('./views/medical-components/volunteer.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 }, {
                     path: '/registration/patient_data',
-                    name: 'dashboardAnalytics',
+                    name: 'patient_data',
                     component: () => import('./views/medical-components/patient.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 }, {
                     path: '/registration/hospital_data',
                     name: 'Hospital',
                     component: () => import('./views/medical-components/hostpital.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 }, {
                     path: '/setting/screening_setting',
                     name: 'screening_setting',
                     component: () => import('./views/medical-components/setting/screening_setting.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 }, {
                     path: '/setting/operation_advice',
                     name: 'operation_advice',
                     component: () => import('./views/medical-components/setting/operation_advice.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 }, {
                     path: '/setting/compensate_setting',
                     name: 'compensate_setting',
                     component: () => import('./views/medical-components/setting/compensate_setting.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
@@ -166,73 +166,66 @@ const router = new Router({
                     }
                 }, {
                     path: '/operation/manage',
-                    name: 'dashboardAnalytics',
+                    name: 'manage',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
                         rule: 'editor'
                     }
                 }, {
                     path: '/operation/emergency',
-                    name: 'dashboardAnalytics',
+                    name: 'emergency',
                     component: () => import('./views/medical-components/operation/emergency_reported.vue'),
                     meta: {
                         rule: 'editor'
                     }
-                },{
-                  path: '/operation/command',
-                  name: 'dashboardAnalytics',
-                  component: () => import('./views/medical-components/operation/command.vue'),
-                  meta: {
-                      rule: 'editor'
-                  }
-              }, {
-                path: '/operation/control',
-                name: 'Operation control',
-                component: () => import('./views/medical-components/operation/operation_control.vue'),
-                meta: {
-                    rule: 'editor'
-                }
-             },
-              {
-                  path: '/operation/call',
-                  name: 'dashboardAnalytics',
-                  component: () => import('./views/medical-components/operation/call_center.vue'),
-                  meta: {
-                      rule: 'editor'
-                  }
                 }, {
-                  path: '/operation/getjob',
-                  name: 'dashboardAnalytics',
-                  component: () => import('./views/medical-components/operation/getjob/getjob.vue'),
-                  meta: {
-                      rule: 'editor'
-                  }
-              }
-              ,
-               {
+                    path: '/operation/command',
+                    name: 'command',
+                    component: () => import('./views/medical-components/operation/command.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                }, {
+                    path: '/operation/control',
+                    name: 'Operation control',
+                    component: () => import('./views/medical-components/operation/operation_control.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/operation/call',
+                    name: 'call',
+                    component: () => import('./views/medical-components/operation/call_center.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                }, {
+                    path: '/operation/getjob',
+                    name: 'getjob',
+                    component: () => import('./views/medical-components/operation/getjob/getjob.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                }
+                ,
+                {
                     path: '/hospital/hospital_transportation',
-                    name: 'dashboardAnalytics',
+                    name: 'hospital_transportation',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
                         rule: 'editor'
                     }
                 }, {
                     path: '/hospital/patient_registration',
-                    name: 'dashboardAnalytics',
-                    component: () => import('./views/DashboardECommerce.vue'),
-                    meta: {
-                        rule: 'editor'
-                    }
-                }, {
-                    path: '/hospital/patient_data',
-                    name: 'dashboardAnalytics',
+                    name: 'patient_registration',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
                         rule: 'editor'
                     }
                 }, {
                     path: '/hospital/hospital_data',
-                    name: 'dashboardAnalytics',
+                    name: 'hospital_data',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
                         rule: 'editor'
@@ -240,16 +233,15 @@ const router = new Router({
                 },
                 {
                     path: '/ready_status',
-                    name: 'dashboardECommerce',
+                    name: 'ready_status',
                     component: () => import('./views/medical-components/ready_status.vue'),
                     meta: {
-                        rule: 'admin'
+                        rule: 'editor'
                     }
-                },
-                {
-                    path: '/ready_status',
-                    name: 'dashboardECommerce',
-                    component: () => import('./views/medical-components/ready_status.vue'),
+                }, {
+                    path: '/setting/user_master',
+                    name: 'user_master',
+                    component: () => import('./views/medical-components/setting/user_master/user_master.vue'),
                     meta: {
                         rule: 'admin'
                     }
@@ -1474,20 +1466,20 @@ router.beforeEach((to, from, next) => {
     //     // get firebase current user
     //     const firebaseCurrentUser = firebase.auth().currentUser;
 
-        if (
-            to.path === "/login" ||
-            to.path === "/pages/forgot-password" ||
-            to.path === "/pages/error-404" ||
-            to.path === "/pages/error-500" ||
-            to.path === "/pages/register" ||
-            to.path === "/callback" ||
-            to.path === "/pages/comingsoon" ||
-            (service.isLoggedIn()&&service.isTokenExpire())
-        ) {
-            return next();
-        }else{
-          router.push('/login');
-        }
+    if (
+        to.path === "/login" ||
+        to.path === "/pages/forgot-password" ||
+        to.path === "/pages/error-404" ||
+        to.path === "/pages/error-500" ||
+        to.path === "/pages/register" ||
+        to.path === "/callback" ||
+        to.path === "/pages/comingsoon" ||
+        (service.isLoggedIn() && service.isTokenExpire())
+    ) {
+        return next();
+    } else {
+        router.push('/login');
+    }
 
     //     router.push({ path: '/pages/login', query: { to: to.path } })
     //     // Specify the current path as the customState parameter, meaning it

@@ -6,21 +6,12 @@ import service from '@/service/service'
 
 export default {
   props:{
-    operation_id:{type:String}
+    operation_id:{type:String},
+    access_sending_editdata:{type:Object}
   },
   data() {
     return {
-      data:{
-      sending_hn: "",
-      sending_diagnose: "",
-      sending_lv: "",
-      sending_breating: "",
-      sending_bleeding: "",
-      sending_watering:"",
-      sending_bone:"",
-      diagnose_role:"",
-      diagnose_name:"",
-      }
+      data:this.access_sending_editdata
     };
   },
   computed:{

@@ -70,8 +70,8 @@
     </div>
     <div class="vx-row mt-10 mr-10">
       <div class="vx-col w-full" style="text-align: right">
-          <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
-          <vs-button  color="warning" @click="$emit('close')">{{$t('cancel')}}</vs-button>
+          <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" color="success" @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
+          <vs-button  color="rgb(144,144,144)" @click="$emit('close')">{{$t('cancel')}}</vs-button>
       </div>
     </div>
 

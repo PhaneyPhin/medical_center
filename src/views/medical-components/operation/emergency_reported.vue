@@ -717,7 +717,7 @@ export default {
         zone: "",
         location_name: "",
         place_detail: "",
-        reciever:JSON.stringify(service.getUser().gen_token.username)
+        reciever:JSON.stringify(service.getUser()).username
       },
       edit_bodydata: {
         reporter_type: null,

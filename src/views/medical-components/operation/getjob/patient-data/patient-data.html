@@ -1,268 +1,262 @@
 <div>
   <div class="vx-col w-full mb-base">
     <vs-divider position="left" class="mb-10">
+      <h3>{{$t("patient_information")}}</h3>
+    </vs-divider>
+    <div class="vx-row mb-2">
+      <div class="vx-col lg:w-1/5 sm:w-full">
+        <label>{{$t('name_prefix')}}</label>
+        <vs-select class="w-full" v-model="name_prefix" :disabled="prefixs_view.length == 0">
+          <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in prefixs_view" />
+        </vs-select>
+      </div>
+      <div class="vx-col lg:w-2/5 sm:w-full">
+        <label>{{$t('name')}}</label>
+        <vs-input class="w-full" v-model="patient_name" />
+      </div>
+      <div class="vx-col lg:w-2/5 sm:w-full">
+        <label>{{$t('surname')}}</label>
+        <vs-input class="w-full" v-model="patient_surname" />
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <div class="vx-col sm:w-1/2">
+        <label>{{$t('age')}}</label>
+        <vs-row vs-type="flex">
+          <vs-input class="w-5/6" v-model="patient_age" />
+          <vs-col vs-w="2" vs-type="flex" vs-justify="flex-start">
+            {{$t('year')}}
+          </vs-col>
+        </vs-row>
+      </div>
+      <div class="vx-col sm:w-1/2">
+        <label>{{$t('month')}}</label>
+        <vs-row vs-type="flex">
+          <vs-input class="w-5/6" v-model="patient_month" />
+          <vs-col vs-w="2" vs-type="flex" vs-justify="flex-start">
+            {{$t('month')}}
+          </vs-col>
+        </vs-row>
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <div class="vx-col lg:w-1/6 sm:w-full">
+        <label>{{$t('gender')}}</label>
+        <div class="vx-row mt-2">
+          <div class="vx-col sm:w-1/2">
+            <vs-radio v-model="patient_gender" vs-value="male">{{$t('male')}}
+            </vs-radio>
+          </div>
+          <div class="vx-col sm:w-1/2">
+            <vs-radio v-model="patient_gender" vs-value="female">{{$t('female')}}
+            </vs-radio>
+          </div>
+        </div>
+      </div>
+      <div class="vx-col lg:w-5/12 sm:w-full">
+        <label>{{$t('nation')}}</label>
+        <vs-select class="w-full" v-model="patient_nation" :disabled="nation_list.length == 0">
+          <vs-select-item :key="index" :value="item.value" :text="$t(item.value)" v-for="(item,index) in nation_list" />
+        </vs-select>
+      </div>
+      <div class="vx-col lg:w-5/12 sm:w-full w-full">
+        <label>{{$t('country')}}</label>
+        <vs-input class="w-full" v-model="patient_country" />
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <div class="vx-col lg:w-1/2 sm:w-full w-full">
+        <label>{{$t('card_id')}}/{{$t('passport')}}</label>
+        <vs-input class="w-full" v-model="patient_cardid" />
+      </div>
+    </div>
+    <div class="vx-row mb-6">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        <label>{{$t('treatment_right')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/8" v-for="(item,index) in treatment_right_list" :key="index">
+        <vs-radio v-model="treatment_right" :vs-value="item">{{$t(item)}}
+        </vs-radio>
+      </div>
+    </div>
+    <div class="vx-row mb-6" v-if="treatment_right == 'etc'">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        <label>{{$t('private_insurance')}}</label>
+      </div>
+      <!-- <div class="vx-row mt-2"> -->
+      <div class="vx-col lg:w-1/8" v-for="(item,index) in private_insurance_list" :key="index">
+        <vs-radio v-model="private_insurance" :vs-value="item">{{item}}
+        </vs-radio>
+      </div>
+      <!-- </div> -->
+    </div>
+    <vs-divider position="left" class="mb-10">
       <h3>{{$t("patient_status")}}</h3>
     </vs-divider>
-    <div class="vx-row">
-      <div class="vx-col w-full">
-        <!-- <table class="table table-bordered">
-            <tr class="head">
-              <td rowspan="2">Time</td>
-              <td colspan="4">Vital Signs</td>
-              <td colspan="4">Vital Signs</td>
-              <td colspan="4">Vital Signs</td>
-              <td rowspan="2">Vital Signs</td>
-              <td rowspan="2">Vital Signs</td>
-            </tr>
-            <tr class="head">
-                <td>T</td>
-                <td>BP</td>
-                <td>PR</td>
-                <td>RR</td>
-                <td>T</td>
-                <td>BP</td>
-                <td>PR</td>
-                <td>RR</td>
-                <td>T</td>
-                <td>BP</td>
-                <td>PR</td>
-                <td>RR</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table> -->
+    <!-----------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------------------------------------------->
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        <label>{{$t('patient_type')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/6">
+        <vs-radio v-model="accident_type" vs-value="accident">{{$t('accident')}}
+        </vs-radio>
+      </div>
+      <div class="vx-col lg:w-1/6">
+        <vs-radio v-model="accident_type" vs-value="sick">{{$t('sick')}}
+        </vs-radio>
+      </div>
+    </div>
+    <vs-divider />
+    <div class="vx-row mb-5">
+      <div class="vx-col lg:w-1/6 md:w-1/3" style="text-align: center">
+        <label>{{$t('pulse_at')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <flat-pickr :config="configdateTimePicker" v-model="pulse_time" placeholder="Choose time" />
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3"></div>
+      <div class="vx-col lg:w-1/6 md:w-1/3" style="text-align: center">
+        <label>{{$t('pulse')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <vs-input type="number" class="w-full" v-model="pulse_count" />
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <label>{{$t('per_minute')}}</label>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col lg:w-1/6 md:w-1/3" style="text-align: center">
+        <label>{{$t('breathing')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <vs-input type="number" class="w-full" v-model="breathing_count" />
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <label>{{$t('per_minute')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3" style="text-align: center">
+        <label>{{$t('blood_pressure')}}</label>
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <vs-input type="number" class="w-full" v-model="pressure_count" />
+      </div>
+      <div class="vx-col lg:w-1/6 md:w-1/3">
+        <label>mm.Hg</label>
+      </div>
+    </div>
+    <vs-divider />
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('sense_status')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col lg:w-1/5 md:w-1/2 mb-5" v-for="(item,index) in sense_status_list" :key="index">
+            <vs-radio v-model="sense_status" :vs-value="item">{{$t(item)}}</vs-radio>
+          </div>
+        </div>
       </div>
     </div>
     <div class="vx-row mb-5">
       <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('broken_bone')}}
+        {{$t('breathing_status')}}
       </div>
       <div class="vx-col md:w-5/6">
         <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in broken_bones" :key="index">
-            <vs-checkbox v-model="data.broken_bone" :vs-value="item">{{item}}</vs-checkbox>
+          <div class="vx-col lg:w-1/5 md:w-1/2 mb-5" v-for="(item,index) in breathing_status_list" :key="index">
+            <vs-radio v-model="breathing_status" :vs-value="item">{{$t(item)}}</vs-radio>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('wound_status')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col lg:w-1/5 md:w-1/2 mb-5" v-for="(item,index) in wound_status_list" :key="index">
+            <vs-radio v-model="wound_status" :vs-value="item">{{$t(item)}}</vs-radio>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vx-row mb-5">
+      <div class="vx-col md:w-1/6" style="text-align: center">
+        {{$t('bone_status')}}
+      </div>
+      <div class="vx-col md:w-5/6">
+        <div class="vx-row">
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in bone_status_list" :key="index">
+            <vs-checkbox v-model="bone_status[index]">{{item}}</vs-checkbox>
           </div>
         </div>
       </div>
     </div>
     <vs-divider position="left" class="mb-10">
-      <h3>Trauma</h3>
+      {{$t('treatment')}}
     </vs-divider>
     <div class="vx-row mb-5">
       <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('trauma_wound')}}
+        {{$t('treat_breath')}}
       </div>
       <div class="vx-col md:w-5/6">
         <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_wounds" :key="index">
-            <vs-checkbox v-model="data.trauma_wound" :vs-value="item">{{item}}</vs-checkbox>
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treat_breath_list" :key="index">
+            <vs-radio v-model="treat_breath" :vs-value="item">{{item}}</vs-radio>
           </div>
         </div>
       </div>
     </div>
     <div class="vx-row mb-5">
       <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('trauma_bone')}}
+        {{$t('treat_bleed')}}
       </div>
       <div class="vx-col md:w-5/6">
         <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_bones" :key="index">
-            <vs-checkbox v-model="data.trauma_bone" :vs-value="item">{{item}}</vs-checkbox>
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treat_bleed_list" :key="index">
+            <vs-radio v-model="treat_bleed" :vs-value="item">{{item}}</vs-radio>
           </div>
         </div>
       </div>
     </div>
     <div class="vx-row mb-5">
       <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('trauma_blood')}}
+        {{$t('treat_bone')}}
       </div>
       <div class="vx-col md:w-5/6">
         <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_bloods" :key="index">
-            <vs-checkbox v-model="data.trauma_blood" :vs-value="item">{{item}}</vs-checkbox>
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treat_bone_list" :key="index">
+            <vs-radio v-model="treat_bone" :vs-value="item">{{item}}</vs-radio>
           </div>
         </div>
       </div>
     </div>
     <div class="vx-row mb-5">
       <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('trauma_body')}}
+        {{$t('cpr_status')}}
       </div>
       <div class="vx-col md:w-5/6">
         <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in trauma_bodys" :key="index">
-            <vs-checkbox v-model="data.trauma_body" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <vs-divider position="left" class="mb-10">None Trauma</vs-divider>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('ntrauma_medicine')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_medicines" :key="index">
-            <vs-checkbox v-model="data.ntrauma_medicine" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('ntrauma_obstetrician')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_obstetricians" :key="index">
-            <vs-checkbox v-model="data.ntrauma_obstetrician" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('ntrauma_child')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_childs" :key="index">
-            <vs-checkbox v-model="data.ntrauma_child" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('ntrauma_surgery')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntrauma_surgerys" :key="index">
-            <vs-checkbox v-model="data.ntrauma_surgery" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('ntruama_other')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in ntruama_others" :key="index">
-            <vs-checkbox v-model="data.ntruama_other" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <vs-divider position="left" class="mb-10">Treatment</vs-divider>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('treatment_breath')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_breaths" :key="index">
-            <vs-checkbox v-model="data.treatment_breath" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('treatment_wound')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_wounds" :key="index">
-            <vs-checkbox v-model="data.treatment_wound" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('treatment_water')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_waters" :key="index">
-            <vs-checkbox v-model="data.treatment_water" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('treatment_bone')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_bones" :key="index">
-            <vs-checkbox v-model="data.treatment_bone" :vs-value="item">{{item}}</vs-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('treatment_cpr')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in treatment_cprs" :key="index">
-            <vs-checkbox v-model="data.treatment_cpr" :vs-value="item">{{item}}</vs-checkbox>
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in cpr_status_list" :key="index">
+            <vs-radio v-model="cpr_status" :vs-value="item">{{item}}</vs-radio>
           </div>
         </div>
       </div>
     </div>
     <vs-divider class="mb-10"></vs-divider>
     <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center;padding-top:10px;">
-        {{$t('medicine_suggestion')}}
-      </div>
-      <div class="vx-col md:w-1/2">
-        <vs-input class="w-full" v-model="data.medicine_suggestion"></vs-input>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
       <div class="vx-col md:w-1/6" style="text-align: center">
         {{$t('primary_result')}}
       </div>
       <div class="vx-col md:w-5/6">
         <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in primary_results" :key="index">
-            <vs-radio v-model="data.primary_result" :vs-value="item">{{item}}</vs-radio>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="vx-row mb-5">
-      <div class="vx-col md:w-1/6" style="text-align: center">
-        {{$t('rc_code')}}
-      </div>
-      <div class="vx-col md:w-5/6">
-        <div class="vx-row">
-          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in rc_codes" :key="index">
-            <vs-radio v-model="data.rc_code" :vs-value="index">{{item}}</vs-radio>
+          <div class="vx-col md:w-1/4 mb-5" v-for="(item,index) in primary_results_list" :key="index">
+            <vs-radio v-model="primary_results" :vs-value="item">{{item}}</vs-radio>
           </div>
         </div>
       </div>
@@ -289,9 +283,9 @@
   </div>
   <div class="vx-row mt-10 mr-10">
     <div class="vx-col w-full" style="text-align: right">
-      <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" vslor="primary"
+      <vs-button  ref="loadableButton" id="button-with-loading" class="vs-con-loading__container" color="success"
         @click="save()" style="margin-right:20px">{{$t('save')}}</vs-button>
-      <vs-button color="warning" @click="$emit('close')">{{$t('cancel')}}</vs-button>
+      <vs-button color="rgb(144,144,144)" @click="$emit('close')">{{$t('cancel')}}</vs-button>
     </div>
   </div>
 </div>

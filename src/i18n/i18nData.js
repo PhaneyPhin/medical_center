@@ -387,7 +387,29 @@ export default {
     nearest_hospital:"Hospital is near",
     have_insurrance:"Patient have social security",
     have_treatment_history:"Patient have treatment history",
-    getjob_report:"Get job list"
+    getjob_report:"Get job list",
+
+    user_data:"user data",
+    user_register:"register user",
+    email:"email",
+    role:"role",
+    role_in_system:"role in system",
+    delete_user_title:"are you sure to delete this user data?",
+    user_master:"User Master",
+    role_id_alert:"please input user role in system",
+    success_title:"data was change successfully",
+
+
+    emergency_data:"Emergency Data",
+    locatio_name:"location",
+    screening_sympton:"screening symtom",
+    accident_place:"accident place",
+    detail_more:"more detail",
+    commanding:"commanding",
+    choose_unit:"choose operating unit",
+    choose_hospital:"choose hospital",
+    distance:"distance",
+    travel_time:"travel time"
   },
   th:{
     locale:'th',
@@ -783,8 +805,31 @@ export default {
     nearest_hospital:"อยู๋ใกล้จากที่เกิดเหตุ",
     have_insurrance:"มีหลักประกัน",
     have_treatment_history:"มีประวัติการรักษา",
-    getjob_report:"รายการงานปฎิบัติการ"
+    getjob_report:"รายการงานปฎิบัติการ",
 
+    user_data:"ข้อมูลผู้ใช้งาน",
+    user_register:"ขึ้นทะเบียนข้อมูลผู้ใช้งาน",
+    email:"อิเมล์",
+    role:"หน้าที่",
+    role_in_system:"หน้าที่ในระบบ",
+    delete_user_title:"คุณต้องการลบข้อมูลผู้ใช้งานนี้ใช่หรือไหม?",
+    user_master:"ข้อมูลผู้ใช้งาน",
+    role_id_alert:"กรุณาเลือกหน้าที่ผู้ใช้งานในระบบ",
+
+    emergency_data:"ข้อมูลการแจ้งเหตุ",
+    locatio_name:"สถานที่",
+    screening_sympton:"คัดกรองอาการ",
+    accident_place:"จุดเกิดเหตุ",
+    detail_more:"รายละเอียดเพิ่มเติ่ม",
+    commanding:"สั่งการ",
+    choose_unit:"เลือกหน่วยปฏิบัติการ",
+    choose_hospital:"เลือกโรงพยาบาล",
+    distance:"ระยะทาง",
+    travel_time:"ระยะเวลา",
+
+    operator_name:"ชือปฏิบัติการ",
+    patient_age:"อายุผู้ป่วย"
+    // operation_name:""
   }
 
 }

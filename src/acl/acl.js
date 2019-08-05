@@ -29,11 +29,10 @@ Vue.use(AclInstaller)
 
 let token = service.getUser()
 let initialRole = 'public'
-console.log(token);
-if(token.temp != undefined){
-  if(token.temp.role_id == "1"){
+if(token.role_id != undefined){
+  if(token.role_id == "1"){
     initialRole = "admin"
-  }else if(token.temp.role_id == "2"){
+  }else if(token.role_id == "2"|| token.role_id =="3"){
     initialRole = "editor"
   }else{
     initialRole = "public"
@@ -41,8 +40,9 @@ if(token.temp != undefined){
 }else{
   initialRole = "public"
 }
+// alert(initialRole);
 
-// let initialRole = 'admin'
+// let initiหalRole = 'admin'
 // if(localStorage.getItem('userRole')) initialRole = localStorage.getItem('userRole')
 
 export default new AclCreate({

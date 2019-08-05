@@ -156,7 +156,7 @@
 				<vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
 					<div class="con-img ml-3">
 						<img
-							v-if="activeUserImg.startsWith('http')"
+							v-if="false"
 							key="onlineImg"
 							:src="activeUserImg"
 							alt="user-img"
@@ -166,7 +166,7 @@
 						<img
 							v-else
 							key="localImg"
-							:src="require(`@/assets/images/portrait/small/${activeUserImg}`)"
+							:src="require(`@/assets/images/portrait/small/avatar-s-20.png`)"
 							alt="user-img"
 							width="40"
 							height="40"
@@ -234,6 +234,7 @@ import 'firebase/auth'
 import VxAutoSuggest from '@/components/vx-auto-suggest/VxAutoSuggest.vue';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import draggable from 'vuedraggable'
+import service from '@/service/service'
 
 export default {
     name: "the-navbar",
@@ -322,10 +323,11 @@ export default {
 
         // PROFILE
         user_displayName() {
-            return JSON.parse(localStorage.getItem('userInfo')).displayName
+            let temp = service.getUser()
+            return temp.name +" "+ temp.surname
         },
         activeUserImg() {
-            return JSON.parse(localStorage.getItem('userInfo')).photoURL || this.$store.state.AppActiveUser.img;
+            return true;
         }
     },
     methods: {

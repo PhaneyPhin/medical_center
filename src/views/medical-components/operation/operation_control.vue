@@ -153,8 +153,8 @@
             <vl-overlay
               :key="index"
               v-for="(marker,index) in markerArr"
-              id="overlay"
-              :position="coordinate(marker.lat,marker.lon)"
+              :id="'overlay'+index"
+              :position="[marker.lon,marker.lat]"
             >
               <template slot-scope="scope">
                 <div class="overlay-content">

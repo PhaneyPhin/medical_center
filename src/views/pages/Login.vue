@@ -183,9 +183,9 @@ export default {
       let token2 = service.decodeToken(token);
       console.log(token2)
       let role = "";
-      if (token2.temp.role_id == "1") {
+      if (token2.role_id == "1") {
         role = "admin";
-      } else if (token2.temp.role_id == "2") {
+      } else if (token2.role_id == "2" || token2.role_id == "3") {
         role = "editor";
       } else {
         role = "public";

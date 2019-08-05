@@ -31,7 +31,6 @@ export default [
     name: "Registration",
     slug: "Registration",
     icon: "FileTextIcon",
-
     i18n: "registration",
     submenu: [
       {
@@ -41,10 +40,10 @@ export default [
         i18n: "operator",
       },
       {
-          url: '/registration/vehicle',
-          name: "Vehicle",
-          slug: "Vehicle",
-          i18n: "vehicle",
+        url: '/registration/vehicle',
+        name: "Vehicle",
+        slug: "Vehicle",
+        i18n: "vehicle",
       },
       {
         url: '/registration/operation_unit',
@@ -61,12 +60,12 @@ export default [
         name: "Valunteer",
         slug: "Valunteer",
         i18n: "valunteer",
-      },{
+      }, {
         url: '/registration/patient_data',
         name: "Patient Data",
         slug: "Patient Data",
         i18n: "patient_data",
-      },{
+      }, {
         url: '/registration/hospital_data',
         name: "Hospital Data",
         slug: "Hospital Data",
@@ -131,17 +130,23 @@ export default [
         i18n: "screening_setting",
       },
       {
-          url: '/setting/operation_advice',
-          name: "operation advice",
-          slug: "Vehicle",
-          i18n: "operation_advice",
+        url: '/setting/operation_advice',
+        name: "operation advice",
+        slug: "Vehicle",
+        i18n: "operation_advice",
       },
       {
         url: '/setting/compensate_setting',
         name: "compensate setting",
         slug: "Vehicle",
         i18n: "compensate_setting",
-    }
+      },
+      {
+        url: '/setting/user_master',
+        name: "User master",
+        slug: "Vehicle",
+        i18n: "user_master",
+      }
     ]
   },
   {

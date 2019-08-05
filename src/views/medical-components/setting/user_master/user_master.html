@@ -1,0 +1,143 @@
+<div class="vx-col w-full mb-base" v-if="renderComponent">
+    <edit-user :isSidebarActive="addNewDataSidebar" :newUser="user" @closeSidebar="addNewDataSidebar = false" />
+    <vs-popup class="holamundo" :title="$t('user_data')" :active.sync="popupActive">
+      <!-- <div class="vx-row ml-5 mr-5"> -->
+        <div class="vx-row mt-5">
+          <div class="vx-col md:w-1/2" style="text-align: right">{{$t('card_id')}} :</div>
+          <div class="vx-col md:w-1/2 result" >{{user.card_id}}</div>
+        </div>
+        <div class="vx-row mt-5">
+            <div class="vx-col md:w-1/2"  style="text-align: right">{{$t('username')}} :</div>
+            <div class="vx-col md:w-1/2 result">{{user.prefix+" "+user.name+" "+user.surname}}</div>
+        </div>
+        <div class="vx-row mt-5">
+            <div class="vx-col md:w-1/2"  style="text-align: right">{{$t('operating_unit_name')}} :</div>
+            <div class="vx-col md:w-1/2 result">{{user.operating_unit_name}}</div>
+        </div>
+        <div class="vx-row mt-5">
+            <div class="vx-col md:w-1/2 "  style="text-align: right">{{$t('email')}} :</div>
+            <div class="vx-col md:w-1/2 result">{{user.email}}</div>
+        </div>
+        <div class="vx-row mt-5">
+            <div class="vx-col md:w-1/2 "  style="text-align: right">{{$t('role')}} :</div>
+            <div class="vx-col md:w-1/2 result">{{user.role}}</div>
+        </div>
+      <!-- </div> -->
+    </vs-popup>
+    <vx-card :title="$t('user_master')">
+        <vs-tabs>
+            <vs-tab :label="$t('user_data')">
+                <div class="mt-3">
+                    <vs-table pagination max-items="10" search :data="table_data">
+
+                        <template slot="thead">
+                            <vs-th sort-key="index">{{$t('order')}}</vs-th>
+                            <vs-th sort-key="name_prefix+name+surname">{{$t('name_surname')}}</vs-th>
+                            <vs-th sort-key="operating_unit_name">{{$t('operating_unit_name')}}</vs-th>
+                            <vs-th sort-key="role_id">{{$t('role_in_system')}}</vs-th>
+                            <vs-th>{{$t('view')}}</vs-th>
+                            <vs-th>{{$t("edit")}}</vs-th>
+                            <vs-th>{{$t("delete")}}</vs-th>
+                        </template>
+
+                        <template slot-scope="{data}">
+                            <vs-tr :data="tr" :key="index" v-for="(tr, index) in table_data">
+
+                                <vs-td :data="index">
+                                    {{index+1}}
+                                </vs-td>
+
+                                <vs-td :data="tr.name_prefix+tr.name+tr.surname">
+                                    {{ tr.name+" "+tr.surname }}
+                                </vs-td>
+
+                                <vs-td :data="tr.operating_unit_name">
+                                    {{ tr.operating_unit_name }}
+                                </vs-td>
+
+                                <vs-td :data="tr.role_id">
+                                    {{ tr.role_name }}
+                                </vs-td>
+                                <vs-td>
+                                    <feather-icon icon="SearchIcon" class="cursor-pointer w-6 h-6" size="small" @click="view(tr)">
+                                    </feather-icon>
+                                </vs-td>
+                                <vs-td>
+                                    <feather-icon icon="EditIcon" class="cursor-pointer w-6 h-6" size="small" @click="user=tr;addNewDataSidebar=true;"></feather-icon>
+                                    </feather-icon>
+                                </vs-td>
+                                <vs-td>
+                                    <feather-icon icon="Trash2Icon" class="cursor-pointer w-6 h-6" size="small" @click="deleteUser(tr)">
+                                    </feather-icon>
+                                </vs-td>
+                            </vs-tr>
+                        </template>
+                    </vs-table>
+                </div>
+            </vs-tab>
+            <vs-tab :label="$t('user_register')">
+              <div class="vx-row mt-5 mr-10 ml-10">
+                <div class="vx-col md:w-1/2">
+                  <label for="">{{$t('card_id')}} <span class="require">*</span></label>
+                  <vs-input v-model="newUser.card_id" class="w-full" :danger="invalid.card_id" ></vs-input>
+                  <div class="error" v-if="invalid.card_id">{{$t('card_id_alert')}}</div>
+                </div>
+                <div class="vx-col md:w-1/2">
+                  <label for="">{{$t('email')}}</label>
+                  <vs-input v-model="newUser.email" class="w-full" ></vs-input>
+
+                </div>
+              </div>
+              <div class="vx-row mt-5 mr-10 ml-10">
+                  <div class="vx-col md:w-1/6">
+                    <label for="">{{$t('prefix')}} <span class="require">*</span></label>
+                    <vs-select class="w-full" v-model="newUser.name_prefix" :danger="invalid.name_prefix">
+                        <vs-select-item :key="index" :value="item.id" :text="item.text" v-for="(item,index) in prefixs" />
+                    </vs-select>
+                    <div class="error" v-if="invalid.name_prefix">{{$t('prefix_alert')}}</div>
+                  </div>
+                  <div class="vx-col md:w-1/3">
+                    <label for="">{{$t('name')}} <span class="require">*</span></label>
+                    <vs-input class="w-full" v-model="newUser.name" :danger="invalid.name"></vs-input>
+                    <div class="error" v-if="invalid.name">{{$t('name_alert')}}</div>
+                  </div>
+                  <div class="vx-col md:w-1/2">
+                    <label for="">{{$t('surname')}} <span class="require">*</span></label>
+                    <vs-input class="w-full" v-model="newUser.surname" :danger="invalid.surname"></vs-input>
+                    <div class="error" v-if="invalid.surname">{{$t('surname_alert')}}</div>
+                  </div>
+                </div>
+                <div class="vx-row mt-5 mr-10 ml-10">
+                    <div class="vx-col md:w-1/2">
+                      <label for="">{{$t('operating_unit_name')}}</label>
+                      <vs-select autocomplete class="w-full" v-model="newUser.operating_unit_id">
+                          <vs-select-item :key="index" :value="item.operating_unit_id" :text="item.operating_unit_name" v-for="(item,index) in operating_units" />
+                        </vs-select>
+                    </div>
+                    <div class="vx-col md:w-1/3">
+                      <label for="">{{$t('role')}} <span class="require">*</span></label>
+                      <vs-select class="w-full" v-model="newUser.role_id" :danger="invalid.role_id" >
+                          <vs-select-item :key="index" :value="item.id" :text="item.name" v-for="(item,index) in roles" />
+                      </vs-select>
+                      <div class="error" v-if="invalid.role_id">{{$t('role_id_alert')}}</div>
+                    </div>
+                    <!-- <div class="vx-col md:w-1/3">
+                      <label for="">{{$t('surname')}}</label>
+                      <vs-input class="w-full" ></vs-input>
+                    </div> -->
+                  </div>
+                  <div class="mt-10">
+                      <div class="vx-row">
+                          <div class="vx-col w-full mt-5" style="text-align: right">
+
+
+                            <vs-button ref="loadableButton" id="button-with-loading" class="vs-con-loading__container mr-5"  vslor="primary" @click="save">{{$t('save')}}</vs-button>
+                            <vs-button color="danger" type="border">{{$t('cancel')}}</vs-button>
+                          </div>
+                      </div>
+                    </div>
+            </vs-tab>
+
+        </vs-tabs>
+    </vx-card>
+</div>

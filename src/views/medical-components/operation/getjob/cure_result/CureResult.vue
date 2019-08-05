@@ -3,44 +3,47 @@
 
 <script>
 import Datepicker from "vuejs-datepicker";
-import service from '@/service/service'
+import service from "@/service/service";
 export default {
   components: {
     Datepicker
-  },props:{
-    operation_id:{type:String}
+  },
+  props: {
+    operation_id: {
+      type: String
+    },
+    cure_result_editdata: {
+      type: Object
+    }
   },
   data() {
     return {
-     data:{
-        admit_status: null,
-        admit_day: "",
-        follower_name: "",
-        admit_result: "",
-        follow_date:null
-     }
+      data: this.cure_result_editdata
     };
   },
-  computed:{
-    body(){
-      var item=this.data;
-      item.operation_id=this.operation_id
+  computed: {
+    body() {
+      var item = this.data;
+      item.operation_id = this.operation_id;
       return item;
     }
   },
-  methods:{
-    save(){
+  methods: {
+    save() {
       // alert(234);
-      service.postData("update_operation_master",this.body).then((result)=>{
-        if(!result.code){
-          this.$swal(this.$t('success_title'),'','success');
-          // this.$emit('close');
-        }else{
-          this.$swal(result.message,'','error');
+      service.postData("update_operation_master", this.body).then(
+        result => {
+          if (!result.code) {
+            this.$swal(this.$t("success_title"), "", "success");
+            // this.$emit('close');
+          } else {
+            this.$swal(result.message, "", "error");
+          }
+        },
+        err => {
+          this.$swal("connection error", "", "error");
         }
-      },err=>{
-        this.$swal('connection error','','error')
-      })
+      );
     }
   }
 };

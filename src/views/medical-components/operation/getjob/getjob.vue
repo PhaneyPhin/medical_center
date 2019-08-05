@@ -11,6 +11,7 @@ export default {
     return {
       savePage:false,
       selectedOperation_id:"",
+      editdata:{},
       table_data: []
     };
   },
@@ -18,9 +19,6 @@ export default {
   created() {
     service.postData("get_getjob")
     .then(result => {
-
-        console.log(result);
-
       if (result.code) {
         this.$swal({
           title: $t("connection_error"),
@@ -34,10 +32,10 @@ export default {
   methods: {
     save(item){
       this.selectedOperation_id=item.operation_id;
+      this.editdata = item
       this.savePage=true;
     },
     canceljob(emergency_id) {
-      console.log(emergency_id);
       this.$swal({
         title: this.$t("cancel_job?"),
         type: "question",

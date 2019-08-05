@@ -88,7 +88,7 @@
                       <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
                         <vs-dropdown vs-trigger-click class="cursor-pointer">
                           <div class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
-                            <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ vehicles.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : vehicles.length }} of {{ contacts.length }}</span>
+                            <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ vehicles.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : vehicles.length }} of {{ vehicles.length }}</span>
                             <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
                           </div>
                           <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
@@ -139,11 +139,11 @@
                 </div>
               </div>
             </div>
-            <div class="mt-5" v-if="false">
+            <div class="mt-5" v-if="!emergency_page">
               <div class="vx-row">
               <div class="vx-col md:w-1/6 mt-5">{{$t("choose_hospital")}}</div>
               <div class="vx-col md:w-5/6 mt-5">
-                <div id="ag-grid-demo">
+                <div id="ag-grid-demo" class="w-full">
 
 
                     <!-- TABLE ACTION ROW -->
@@ -304,7 +304,6 @@ export default {
         {
           headerName: this.$t('operating_unit_name'),
           field: 'operating_unit_name',
-          width: 250,
           filter: true,
           resizable: true
 
@@ -313,18 +312,21 @@ export default {
           headerName: this.$t("vehicle_type"),
           field: 'unit_type',
           filter: true,
-          width: 175,
           resizable: true
         },
         {
-          headerName: this.$t('plate_nuumber'),
+          headerName: this.$t('plate_number'),
           field: 'plate_number',
           filter: true,
-          width: 250,
           resizable: true
         },{
-          headerName:this.$t('distance'),
-          field:"vehicle_id",
+          headerName:this.$t('distance')+" (Km)",
+          field:"distance",
+          resizable: true
+        },
+        {
+          headerName:this.$t('travel_time')+" (min)",
+          field:"travel_time",
           resizable: true
         },{
            checkboxSelection: true,
@@ -349,7 +351,6 @@ export default {
         {
           headerName: this.$t('hospital_name'),
           field: 'hospital_name',
-          width: 300,
           filter: true,
           resizable: true
 
@@ -358,11 +359,14 @@ export default {
           headerName: this.$t("potential"),
           field: 'potential',
           filter: true,
-          width: 250,
           resizable: true
         },{
-          headerName:this.$t('distance'),
-          field:"hospital_id",
+          headerName:this.$t('distance')+" (Km)",
+          field:"distance",
+          resizable: true
+        },{
+          headerName:this.$t('travel_time')+" (min)",
+          field:"travel_time",
           resizable: true
         },{
            checkboxSelection: true,
@@ -395,7 +399,8 @@ export default {
         else return 1
       },
       set(val) {
-        this.gridApi.paginationGoToPage(val - 1);
+          if(this.gridApi)
+          this.gridApi.paginationGoToPage(val - 1);
       }
     },
      paginationPageSize_hospital() {
@@ -412,7 +417,7 @@ export default {
         else return 1
       },
       set(val) {
-        this.gridApi.paginationGoToPage(val - 1);
+        if(this.gridApi_hospital)  this.gridApi.paginationGoToPage(val - 1);
       }
     },
     selectedRow(){
@@ -430,18 +435,7 @@ export default {
 
 // decodeToken(token);
      this.getData();
-     service.getData("/get_hospital_master").then((result)=>{
-        // console.log(result);
-        if(!result.code){
 
-          this.hospitals=result.data;
-        }else{
-
-          this.$swal(result.message,'','error')
-        }
-      },err=>{
-        this.$swal('connection error','','error')
-      })
    },
    methods: {
      select(){
@@ -488,20 +482,40 @@ export default {
       command(emergency_report){
          this.emergency=emergency_report;
           this.emergency_page=false;
-          service.getData("get_command_vehicle?emergency_reported_id="+this.emergency.emergency_reported_id).then((result)=>{
-        if(!result.code){
-            this.vehicles=result.data;
-            this.$nextTick(()=>{
-                console.log(this.gridOptions);
-                this.gridApi = this.gridOptions.api;
-                console.log(this.gridOptions.api)
-            })
-        }else{
-          this.$swal(result.message,'','error');
-        }
-      },err=>{
-        this.$swal('connection error','','error')
-      })
+          service.getData("get_command_vehicle?emergency_reported_id="+this.emergency.emergency_reported_id+"&lat="+emergency_report.lat+"&lon="+emergency_report.lon).then((result)=>{
+            if(!result.code){
+                this.vehicles=result.data.map((item)=>{
+                  item.distance=(parseInt(item.distance)/1000).toFixed(2);
+                  item.travel_time=(parseInt(item.travel_time)/60).toFixed(2);
+                  return item;
+                });
+                this.$nextTick(()=>{
+                    console.log(this.gridOptions);
+                    this.gridApi = this.gridOptions.api;
+                    console.log(this.gridOptions.api)
+                })
+            }else{
+              this.$swal(result.message,'','error');
+            }
+          },err=>{
+            this.$swal('connection error','','error')
+          })
+          service.getData("/get_closest_hospital?lat="+emergency_report.lat+"&lon="+emergency_report.lon).then((result)=>{
+            // console.log(result);
+            if(!result.code){
+
+              this.hospitals=result.data.map((item)=>{
+                   item.distance=(parseInt(item.distance)/1000).toFixed(2);
+                  item.travel_time=(parseInt(item.travel_time)/60).toFixed(2);
+                  return item;
+              });
+            }else{
+
+              this.$swal(result.message,'','error')
+            }
+          },err=>{
+            this.$swal('connection error','','error')
+          })
       },
       forceRerender() {
         // Remove my-component from the DOM
@@ -520,8 +534,8 @@ export default {
       },
       save(){
          var operating_unit_id=this.gridApi.getSelectedNodes().map((item)=>item.data.operating_unit_id);
-        //  var hospital_id=this.gridApi_hospital.getSelectedNodes().map((item)=>item.data.hospital_id);
-         var data = {emergency_reported_id:this.emergency.emergency_reported_id, operating_unit_id };
+         var hospital_id=this.gridApi_hospital.getSelectedNodes().map((item)=>item.data.hospital_id);
+         var data = {emergency_reported_id:this.emergency.emergency_reported_id, operating_unit_id ,hospital_id};
          console.log(data);
          service.postData("command_operating_unit",data).then((result)=>{
            if(!result.code){

@@ -10,6 +10,9 @@ import service from '@/service/service'
 export default {
   props:{
     operation_id:{
+      type:String
+    },
+    general_editdata:{
       type:Object
     }
   },
@@ -21,7 +24,7 @@ export default {
       screening_minors:[],
       operating_units:[],
       car_types:service.car_type,
-      data:{operating_unit_id:"",car_type:"",perform_place:"",zone:"",police_office:"",plate_number:"",officer1:"",officer2:"",officer3:"",officer4:"",result_type:"a",perform_result:"",perform_inside_zone:"",place_detail:"",screening_id:""}
+      data:this.general_editdata
     }
   },
   computed:{
@@ -54,7 +57,7 @@ export default {
         return item;
     }
   },
-  created(){
+  created(){   
     service.getData("/get_screening_minor").then((result)=>{
       if(!result.code){
         this.screening_minors=result.data;

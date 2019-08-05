@@ -184,7 +184,10 @@ export default {
               this.$vs.loading.close("#button-with-loading > .con-vs-loading")
               if(!result.code){
                 this.isSidebarActive=false;
-                this.$swal(this.$t('success_title'),'','success');
+
+                this.$swal(this.$t('success_title'),'','success').then((result)=>{
+                  this.isSidebarActiveLocal=false;
+                });
               }else{
                 this.$swal(result.message,'','error');
               }
